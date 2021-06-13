@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "parse_code.C": "cpp",
+        "main.C": "cpp",
+        "scene_parser.C": "cpp",
+        "object3d.C": "cpp",
+        "image.C": "cpp",
+        "raytracer.C": "cpp",
+        "sphere.C": "cpp",
+        "camera.C": "cpp",
+        "group.C": "cpp",
+        "cmath": "c"
+    }
+}
