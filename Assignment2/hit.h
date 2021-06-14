@@ -35,6 +35,9 @@ public:
     t = _t; material = m; normal = n; 
     intersectionPoint = ray.pointAtParameter(t); }
 
+  void set(float _t) {
+    t = _t; }
+
 private: 
 
   // REPRESENTATION

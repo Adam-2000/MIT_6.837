@@ -36,6 +36,7 @@ public:
     assert (y >= 0 && y < 4);
     return data[y][x]; }
   
+  float get_det();
   // MODIFIERS
   void Set(int x, int y, float v) {
     assert (x >= 0 && x < 4);
@@ -85,6 +86,10 @@ public:
     Transform(v2);
     v.Set(v2.x(),v2.y()); }
 
+  void TransformPoint(Vec3f &v) const {
+    Vec4f v2 = Vec4f(v.x(),v.y(),v.z(),1);
+    Transform(v2);
+    v.Set(v2.x()/v2.w(),v2.y()/v2.w(),v2.z()/v2.w()); }
   // Use to transform the direction of the ray
   // (ignores any translation)
   void TransformDirection(Vec3f &v) const {
@@ -107,5 +112,16 @@ private:
 
 // ====================================================================
 // ====================================================================
+inline ostream &operator<<(ostream &os, const Matrix &m) {
+  os << "Matrix <\n";
+  for (int i = 0; i < 4; i++){
+    for (int j = 0; j < 4; j++){
+      os << m.Get(j, i)<<"  ";
+    }
+    os << "\n";
+  }
+  return os;
+}
+
 
 #endif

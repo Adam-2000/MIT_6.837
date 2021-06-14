@@ -13,6 +13,7 @@
 #include "triangle.h"
 #include "transform.h"
 
+// #define M_PI 3.141592653589793238462
 #define DegreesToRadians(x) ((M_PI * x) / 180.0f)
 
 // ====================================================================
@@ -159,7 +160,7 @@ void SceneParser::parseLights() {
   // read in the number of objects
   getToken(token); assert (!strcmp(token, "numLights"));
   num_lights = readInt();
-  lights = new (Light*)[num_lights];
+  lights = new Light*[num_lights];
   // read in the objects
   int count = 0;
   while (num_lights > count) {

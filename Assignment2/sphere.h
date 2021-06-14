@@ -3,18 +3,17 @@
 
 #include "object3d.h"
 #include "vectors.h"
-#include <math.h>
 
 class Sphere: public Object3D{
 
 public:
-    Sphere(Vec3f center, float radius, Material* m): center(center), radius(radius){
+    Sphere(Vec3f &center, float radius, Material* m): center(center), radius(radius){
         this->m = m;
     }
     ~Sphere(){}
 
     virtual bool intersect(const Ray &r, Hit &h, float tmin){
-        Vec3f Ro = center - r.pointAtParameter(tmin);
+        Vec3f Ro = center - r.getOrigin();
         float Ro2 = Ro.Dot3(Ro);
         float r2 = radius * radius;
         bool inside = false;
@@ -28,16 +27,22 @@ public:
             return false;
         }
         float t_temp;
+        Vec3f n;
         if (inside){
-            t_temp = tmin + tp + sqrt(r2 - d2);
-            if (t_temp < h.getT()){
-                h.set(t_temp, m, r);
+            t_temp = tp + std::sqrt(r2 - d2);
+            if (t_temp < h.getT() && t_temp >= tmin){
+                // n = center - r.pointAtParameter(t_temp);
+                n = r.pointAtParameter(t_temp) - center;
+                n.Normalize();
+                h.set(t_temp, m, n, r);
                 return true;
             }
         } else {
-            t_temp = tmin + tp - sqrt(r2 - d2);
-            if (t_temp < h.getT()){
-                h.set(t_temp, m, r);
+            t_temp = tp - std::sqrt(r2 - d2);
+            if (t_temp < h.getT() && t_temp >= tmin){
+                n = r.pointAtParameter(t_temp) - center;
+                n.Normalize();
+                h.set(t_temp, m, n, r);
                 return true;
             }     
         }

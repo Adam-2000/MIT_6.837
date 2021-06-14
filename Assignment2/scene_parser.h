@@ -3,6 +3,7 @@
 
 #include "vectors.h"
 #include <assert.h>
+// #include "light.h"
 
 class Camera;
 class Light;

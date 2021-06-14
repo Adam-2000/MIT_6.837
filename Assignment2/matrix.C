@@ -69,6 +69,18 @@ void Matrix::Transpose(Matrix &m) const {
   }
 }
 
+float Matrix::get_det(){
+  float a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
+  a1 = data[0][0]; b1 = data[0][1]; c1 = data[0][2]; d1 = data[0][3];
+  a2 = data[1][0]; b2 = data[1][1]; c2 = data[1][2]; d2 = data[1][3];
+  a3 = data[2][0]; b3 = data[2][1]; c3 = data[2][2]; d3 = data[2][3];
+  a4 = data[3][0]; b4 = data[3][1]; c4 = data[3][2]; d4 = data[3][3];
+
+  float det = det4x4(a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4,d1,d2,d3,d4);
+  return det;
+}
+
+
 // ===================================================================
 // ===================================================================
 // INVERSE
