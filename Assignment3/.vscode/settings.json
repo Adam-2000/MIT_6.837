@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "glCanvas.C": "cpp",
+        "stdlib.h": "c"
+    }
+}
