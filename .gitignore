@@ -1,6 +1,6 @@
-/.vs/
-/.vscode/
+**/.vs/
+**/.vscode/
 **/*.o
 **/*.depend
 **/*.tga
-raytracer
+**/raytracer
