@@ -107,7 +107,7 @@ void GLCanvas::display(void)
   // ========================================================
   // DRAW AXES
   // remove this line once you've started rendering primitive objects
-  drawAxes(); 
+  // drawAxes(); 
   // ========================================================
 
   glEnable(GL_LIGHTING);
@@ -191,6 +191,7 @@ void GLCanvas::motion(int x, int y) {
   // Left button = rotation
   // (rotate camera around the up and horizontal vectors)
   if (mouseButton == GLUT_LEFT_BUTTON) {
+    // std::cout<<"0";
     scene->getCamera()->rotateCamera(0.005*(mouseX-x), 0.005*(mouseY-y));
     mouseX = x;
     mouseY = y;
@@ -198,6 +199,7 @@ void GLCanvas::motion(int x, int y) {
   // Middle button = translation
   // (move camera perpendicular to the direction vector)
   else if (mouseButton == GLUT_MIDDLE_BUTTON) {
+    // std::cout<<"1";
     scene->getCamera()->truckCamera((mouseX-x)*0.05, (y-mouseY)*0.05);
     mouseX = x;
     mouseY = y;
@@ -205,6 +207,7 @@ void GLCanvas::motion(int x, int y) {
   // Right button = zoom
   // (move camera along the direction vector)
   else if (mouseButton == GLUT_RIGHT_BUTTON) {
+    // std::cout<<"2";
     scene->getCamera()->dollyCamera((x-mouseX)*0.05);
     mouseX = x;
     mouseY = y;
@@ -244,7 +247,13 @@ void GLCanvas::keyboard(unsigned char key, int x, int y) {
 void GLCanvas::initialize(SceneParser *_scene, void (*_renderFunction)(void)) {
   scene = _scene;
   renderFunction = _renderFunction;
-
+  // added myself!!!!!!!!!!!!
+  // std::cout<<"GLCanvas::initialize:0"<<std::endl;
+  //   int argc = 1;
+  //   char name[] = "OpenGL Viewer";
+  //   // char **argv = &name;
+  //   glutInit(&argc, (char **)&name);
+  // std::cout<<"GLCanvas::initialize:1"<<std::endl;
   // Set global lighting parameters
   glEnable(GL_LIGHTING);
   glShadeModel(GL_SMOOTH);
@@ -257,6 +266,8 @@ void GLCanvas::initialize(SceneParser *_scene, void (*_renderFunction)(void)) {
   // the command line, do that here
   glutInitWindowSize(400,400);
   glutInitWindowPosition(100,100);
+  
+  
   glutCreateWindow("OpenGL Viewer");
 
   glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
