@@ -47,8 +47,10 @@ class PhongMaterial : public Material {
 public:
 
   // CONSTRUCTORS & DESTRUCTOR
-  PhongMaterial(const Vec3f &diffuseColor, const Vec3f &specularColor, float exponent):
-    specularColor(specularColor), exponent(exponent){
+  PhongMaterial(const Vec3f &diffuseColor, const Vec3f &specularColor, float exponent, const Vec3f &reflectiveColor, 
+                    const Vec3f &transparentColor, float indexOfRefraction):
+                specularColor(specularColor), exponent(exponent), reflectiveColor(reflectiveColor), 
+                    transparentColor(transparentColor), indexOfRefraction(indexOfRefraction){
     this->diffuseColor = diffuseColor;
   }
   virtual ~PhongMaterial() {}
@@ -56,6 +58,8 @@ public:
   // ACCESSORS
   virtual Vec3f getDiffuseColor() const { return diffuseColor; }
   virtual Vec3f getSpecularColor() const { return specularColor; }
+  virtual Vec3f getReflectiveColor() const { return reflectiveColor; }
+  virtual Vec3f getTransparentColor() const { return transparentColor; }
 
   virtual Vec3f Shade(const Ray &ray, const Hit &hit, const Vec3f &dirToLight, 
           const Vec3f &lightColor) const{
@@ -71,6 +75,9 @@ protected:
 
   // REPRESENTATION
   Vec3f specularColor;
+  Vec3f reflectiveColor;
+  Vec3f transparentColor;
+  float indexOfRefraction;
   float exponent;
 };
 

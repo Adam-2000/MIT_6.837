@@ -11,6 +11,7 @@
 #include "ray.h"
 #include "glCanvas.h"
 #include "raytracer.h"
+#include "render.h"
 #include "sphere.h"
 #define N_LARGE 10000
 
@@ -78,10 +79,10 @@ int main(int argc, char** argv){
         // std::cout<<"main:1"<<std::endl;
         GLCanvas glc = GLCanvas();
         // std::cout<<"main:2"<<std::endl;
-        glc.initialize(&scene, raytracer);
+        glc.initialize(&scene, render);
         // std::cout<<"main:3"<<std::endl;
     } else {
-        raytracer();
+        render();
         // Image img_output = Image(width, height);
         // Image img_depth = Image(width, height);
         // Image img_normal = Image(width, height);
