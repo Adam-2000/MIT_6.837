@@ -1,6 +1,6 @@
 /.vs/
 /.vscode/
-*.o
-*.depend
-*.tga
+**/*.o
+**/*.depend
+**/*.tga
 raytracer
