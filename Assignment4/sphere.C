@@ -1,4 +1,5 @@
 #include "sphere.h"
+#include "glCanvas.h"
 int theta_steps;
 int phi_steps;
 bool gouraud_flag;

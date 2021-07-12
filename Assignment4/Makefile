@@ -16,7 +16,9 @@ SRCS 	 	= main.C \
 		  raytracer.C \
 		  light.C \
 		  camera.C \
-		  glCanvas.C
+		  glCanvas.C \
+		    render.C \
+			rayTree.C
 
 # ===============================================================
 # NOTE:  On athena, the Mesa GL libraries are currently located in the
