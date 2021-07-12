@@ -14,7 +14,7 @@ public:
     }
     ~Triangle(){}
 
-    virtual bool intersect(const Ray &r, Hit &h, float tmin){
+    bool intersect(const Ray &r, Hit &h, float tmin){
         Matrix mat, mat1, mat2, mat3;
         int i, j;
         float detA;
@@ -78,7 +78,7 @@ public:
         }
         return false;
     }
-    virtual void paint(){
+    void paint(){
         this->m->glSetMaterial();
         glBegin(GL_TRIANGLES);
         glNormal3f(normal.x(), normal.y(), normal.z());

@@ -43,7 +43,7 @@ public:
         h.set(h.getT() * std::pow(det, 1.0/3));
         return false;
     }
-    virtual void paint(){
+    void paint(){
         glPushMatrix();
         GLfloat *glMatrix = mat.glGet();
         glMultMatrixf(glMatrix);

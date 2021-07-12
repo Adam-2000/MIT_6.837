@@ -3,4 +3,5 @@
 extern int argc_glb;
 extern char** argv_glb;
 void render();
+void traceRayFunction(float x, float y);
 #endif

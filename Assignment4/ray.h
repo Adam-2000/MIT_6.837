@@ -19,7 +19,9 @@ public:
   Ray () {}
   Ray (const Vec3f &orig, const Vec3f &dir) {
     origin = orig; 
-    direction = dir; }
+    direction = dir; 
+    direction.Normalize();
+  }
   Ray (const Ray& r) {*this=r;}
 
   // ACCESSORS

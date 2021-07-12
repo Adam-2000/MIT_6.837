@@ -13,7 +13,7 @@ public:
     }
     ~Plane(){}
 
-    virtual bool intersect(const Ray &r, Hit &h, float tmin){
+    bool intersect(const Ray &r, Hit &h, float tmin){
         float t_ = (d - normal.Dot3(r.getOrigin())) / normal.Dot3(r.getDirection());
         if (t_ >= tmin && t_ < h.getT()){
             // if (normal.Dot3(r.getDirection()) <= 0){
@@ -26,7 +26,7 @@ public:
         }
         return false;
     }
-    virtual void paint(){
+    void paint(){
         this->m->glSetMaterial();
         Vec3f vec_t = Vec3f(1, 0, 0);
         if (normal.x() == 1){

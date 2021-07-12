@@ -16,7 +16,7 @@ public:
     }
     ~Sphere(){}
 
-    virtual bool intersect(const Ray &r, Hit &h, float tmin){
+    bool intersect(const Ray &r, Hit &h, float tmin){
         Vec3f Ro = center - r.getOrigin();
         float Ro2 = Ro.Dot3(Ro);
         float r2 = radius * radius;
@@ -53,7 +53,7 @@ public:
         return false;
     }
 
-    virtual void paint();
+    void paint();
 private:
 
     Vec3f center;

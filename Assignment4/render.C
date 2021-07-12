@@ -13,12 +13,70 @@
 #include "render.h"
 #include "sphere.h"
 #include "raytracer.h"
+#include "rayTree.h"
 int argc_glb;
 char** argv_glb;
 #define N_LARGE 10000
+#define EPSILON 0.001
+void traceRayFunction(float x, float y){
+    // std::cout << "render:" << std::endl;
+    char *input_file = NULL;
 
+    bool shade_back_flag = false;
+    gouraud_flag = false;
+    bool shadow_flag = false;
+    int bounces = 0;
+    float weight = 0.1;
+
+    // sample command line:
+    // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
+
+    for (int i = 1; i < argc_glb; i++) {
+        if (!strcmp(argv_glb[i],"-input")) {
+            i++; assert (i < argc_glb); 
+            input_file = argv_glb[i];
+        } else if (!strcmp(argv_glb[i],"-shade_back")) {
+            shade_back_flag = true;
+        } else if (!strcmp(argv_glb[i],"-tessellation")) {
+            i++; assert (i < argc_glb);
+            theta_steps = atof(argv_glb[i]);
+            i++; assert (i < argc_glb);
+            phi_steps = atof(argv_glb[i]);
+        } else if (!strcmp(argv_glb[i],"-gouraud")) {
+            gouraud_flag = true;
+        } else if (!strcmp(argv_glb[i],"-shadows")) {
+            shadow_flag = true;
+        } else if (!strcmp(argv_glb[i],"-bounces")) {
+            i++; assert (i < argc_glb); 
+            bounces = atof(argv_glb[i]);
+        } else if (!strcmp(argv_glb[i],"-weight")) {
+            i++; assert (i < argc_glb); 
+            weight = atof(argv_glb[i]);
+        } else {
+            ;
+        }
+    }
+
+    SceneParser scene = SceneParser(input_file);
+    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag);
+
+    Camera* cam = scene.getCamera();
+
+    Ray r = cam->generateRay(Vec2f(x, y));
+    Hit h = Hit(N_LARGE, NULL, Vec3f());;
+    float tmin = cam->getTMin();
+
+    rtracer.traceRay(r, tmin, 0, 1.0, 1.0, h);
+    if (h.getT() + EPSILON >= N_LARGE){
+        RayTree::SetMainSegment(r, 0, 20);
+    } else {
+        RayTree::SetMainSegment(r, 0, h.getT());
+    }
+    
+
+}
 void render(){
-    std::cout << "render:" << std::endl;
+    // std::cout << "render:" << std::endl;
     char *input_file = NULL;
     int width = 100;
     int height = 100;
@@ -30,8 +88,8 @@ void render(){
     bool shade_back_flag = false;
     gouraud_flag = false;
     bool shadow_flag = false;
-    int bounces;
-    float weight;
+    int bounces = 0;
+    float weight = 0.1;
 
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
@@ -84,6 +142,7 @@ void render(){
     }
 
     SceneParser scene = SceneParser(input_file);
+    // std::cout << shadow_flag << std::endl;
     RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag);
 
     Image img_output = Image(width, height);
