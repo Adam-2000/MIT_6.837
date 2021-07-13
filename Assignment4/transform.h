@@ -21,6 +21,7 @@ public:
         Vec3f dir = r.getDirection();
         inv_m.Transform(orig);
         inv_m.TransformDirection(dir);
+        float ratio = dir.Length();
         dir.Normalize();
         Ray r_tran = Ray(orig, dir);
         Vec3f new_normal;
@@ -31,16 +32,16 @@ public:
         // std::cout<<h.getNormal()<<std::endl;
         // h_temp.set(h.getT() / std::pow(det, 1.0/3), h.getMaterial(), h.getNormal(), r_tran);
         // if (obj->intersect(r_tran, h, tmin)){
-        h.set(h.getT() / std::pow(det, 1.0/3));
-        if (obj->intersect(r_tran, h, tmin / std::pow(det, 1.0/3))){
+        h.set(h.getT() * ratio);
+        if (obj->intersect(r_tran, h, tmin * ratio)){
             new_normal = h.getNormal();
             inv_t_m.TransformDirection(new_normal);
             new_normal.Normalize();
-            h.set(h.getT() * std::pow(det, 1.0/3), h.getMaterial(), new_normal, r);
+            h.set(h.getT() / ratio, h.getMaterial(), new_normal, r);
             // h.set(h.getT(), h.getMaterial(), new_normal, r);
             return true;
         }
-        h.set(h.getT() * std::pow(det, 1.0/3));
+        h.set(h.getT() / ratio);
         return false;
     }
     void paint(){
