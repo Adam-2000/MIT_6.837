@@ -13,8 +13,35 @@ public:
         inv_m.Inverse();
         inv_m.Transpose(inv_t_m);
         det = mat.get_det();
+        if (obj->getBoundingBox() != NULL){
+            Vec3f vec_min = obj->getBoundingBox()->getMin();
+            Vec3f vec_max = obj->getBoundingBox()->getMax();
+            Vec3f vec_min_new = vec_min;
+            Vec3f vec_max_new = vec_max;
+            mat.Transform(vec_min_new);
+            mat.Transform(vec_max_new);
+            Vec3f vec_new;
+            for (int i; i < 8; i++){
+                vec_new = Vec3f(i & 4 ? vec_max.x() : vec_min.x(), 
+                                i & 2 ? vec_max.y() : vec_min.y(),
+                                i & 1 ? vec_max.z() : vec_min.z());
+                mat.Transform(vec_new);
+                Vec3f::Min(vec_min_new, vec_min_new, vec_new);
+                Vec3f::Max(vec_max_new, vec_max_new, vec_new);
+            }
+            this->bbox = new BoundingBox(vec_min_new, vec_max_new);
+            
+        } else {
+            bbox = NULL;
+        }
+        
     }
-    ~Transform(){}
+    ~Transform(){
+        if(this->bbox != NULL) {
+            delete this->bbox; 
+            this->bbox = NULL;
+        }
+    }
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         Vec3f orig = r.getOrigin();

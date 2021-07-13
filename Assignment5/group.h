@@ -11,6 +11,10 @@ public:
     }
     ~Group(){
         delete [] obj;
+        if (this->bbox != NULL){
+            delete this->bbox;
+            this->bbox = NULL;
+        }
     }
 
     bool intersect(const Ray &r, Hit &h, float tmin){
@@ -25,8 +29,22 @@ public:
     void addObject(int index, Object3D *obj){
         if (index >= 0 && index < n_obj){
             this->obj[index] = obj;
+            if (obj->getBoundingBox() != NULL){
+                if (this->bbox == NULL){
+                    this->bbox = new BoundingBox(*obj->getBoundingBox());
+                } else {
+                    this->bbox->Extend(obj->getBoundingBox());
+                }
+            }
         }
     }
+
+    void insertIntoGrid(Grid *g, Matrix *m){
+        for (int i = 0; i < n_obj; i++){
+            obj[i]->insertIntoGrid(g, m);
+        }
+    }
+
     virtual void paint(){
         int i;
         for (i = 0; i < n_obj; i++){

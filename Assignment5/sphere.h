@@ -4,6 +4,7 @@
 #include "object3d.h"
 #include "vectors.h"
 #include <cmath>
+#include "grid.h"
 #define PI 3.141592653589793238462 
 extern int theta_steps;
 extern int phi_steps;
@@ -13,8 +14,12 @@ class Sphere: public Object3D{
 public:
     Sphere(Vec3f &center, float radius, Material* m): center(center), radius(radius){
         this->m = m;
+        Vec3f vec_min = center - Vec3f(radius, radius, radius);
+        Vec3f vec_max = center + Vec3f(radius, radius, radius);
+
+        this->bbox = new BoundingBox(vec_min, vec_max);
     }
-    ~Sphere(){}
+    ~Sphere(){delete this->bbox; this->bbox = NULL;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         Vec3f Ro = center - r.getOrigin();
@@ -51,6 +56,31 @@ public:
             }     
         }
         return false;
+    }
+    void insertIntoGrid(Grid *g, Matrix *m){
+        BoundingBox* bb = g->getBoundingBox();
+        int nx, ny, nz;
+        Vec3f vec_min = bb->getMin();
+        Vec3f vec_max = bb->getMax();
+        g->get_n(nx, ny, nz);
+        float dx = (vec_max.x() - vec_min.x()) / nx;
+        float dy = (vec_max.y() - vec_min.y()) / ny;
+        float dz = (vec_max.z() - vec_min.z()) / nz;
+        float big_radius = Vec3f(dx, dy, dz).Length() + radius;
+        float small_radius = -Vec3f(dx, dy, dz).Length() + radius;
+        float dist;
+        Vec3f grid_center;
+        for (int x = 0; x < nx; x++){
+            for (int y = 0; y < ny; y++){
+                for(int z = 0; z < nz; z++){
+                    grid_center = vec_min + Vec3f((x + 0.5) * dx, (y + 0.5) * dy, (z + 0.5) * dz);
+                    dist = (grid_center - center).Length();
+                    if(dist <= big_radius && dist >= small_radius){
+                        g->set_array(true, x, y, z);
+                    }
+                }
+            }
+        }
     }
 
     void paint();

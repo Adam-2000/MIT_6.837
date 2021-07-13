@@ -9,10 +9,16 @@ class Triangle: public Object3D{
 public:
     Triangle(Vec3f &a, Vec3f &b, Vec3f &c, Material* m): a(a), b(b), c(c){
         this->m = m;
+        Vec3f vec_min, vec_max;
+        Vec3f::Min(vec_min, a, b);
+        Vec3f::Min(vec_min, vec_min, c);
+        Vec3f::Max(vec_max, a, b);
+        Vec3f::Max(vec_max, vec_max, c);
+        this->bbox = new BoundingBox(vec_min, vec_max);
         Vec3f::Cross3(normal, b - a, c - b);
         normal.Normalize();
     }
-    ~Triangle(){}
+    ~Triangle(){ delete this->bbox; this->bbox = NULL;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         Matrix mat, mat1, mat2, mat3;
@@ -50,29 +56,10 @@ public:
         beta = mat1.get_det() / detA;
         gamma = mat2.get_det() / detA;
         t = mat3.get_det() / detA;
-        // std::cout << mat << std::endl;
-        // if(!mat.Inverse()){
-        //     std::cout << "Triangle::intersect: No inverse mat." << std::endl;
-        //     return false;
-        // }
-        // mat.Transform(barycentric);
-        // if (barycentric[0] > 0 && barycentric[1] > 0 && barycentric[0] + barycentric[1] < 1 
-        //             && barycentric[2] > tmin && barycentric[2] < h.getT()){
-        //     // if (normal.Dot3(r.getDirection()) <= 0){
-        //     //     h.set(barycentric[2], m, normal, r);
-        //     // } else {
-        //     //     h.set(barycentric[2], m, Vec3f(0, 0, 0) - normal, r);
-        //     // }
-        //     h.set(barycentric[2], m, normal, r);
-        //     return true;
-        // }
+
         if (beta > 0 && gamma > 0 && beta + gamma < 1 
                     && t > tmin && t < h.getT()){
-            // if (normal.Dot3(r.getDirection()) <= 0){
-            //     h.set(barycentric[2], m, normal, r);
-            // } else {
-            //     h.set(barycentric[2], m, Vec3f(0, 0, 0) - normal, r);
-            // }
+
             h.set(t, m, normal, r);
             return true;
         }
