@@ -125,14 +125,17 @@ void GLCanvas::display(void)
   for (int i=0; i<scene->getNumLights(); i++) {
     scene->getLight(i)->glInit(i);
   }
-
+  // std::cout<<"glCanvas:display"<<std::endl;
   if (visualize_grid) {
     if (visualize_grid_march == 0) {
       grid->paint();
       grid->getBoundingBox()->paint();
     } else if (visualize_grid_march == 1) {
+      // std::cout<<"glcanvas::display1.0"<<std::endl;
       RayTree::paintHitCells();
+      // std::cout<<"glcanvas::display1.1"<<std::endl;
       grid->getBoundingBox()->paint();
+      // std::cout<<"glcanvas::display1.2"<<std::endl;
     } else {
       RayTree::paintEnteredFaces();
       grid->getBoundingBox()->paint();
@@ -249,6 +252,7 @@ void GLCanvas::motion(int x, int y) {
 void GLCanvas::keyboard(unsigned char key, int i, int j) {
   switch (key) {
   case 'r':  case 'R':
+    std::cout<<"glCanvas::keyboard:R"<<visualize_grid_march<<std::endl;
     printf("Rendering scene... "); 
     fflush(stdout);
     if (renderFunction) renderFunction();
@@ -267,6 +271,7 @@ void GLCanvas::keyboard(unsigned char key, int i, int j) {
     float y = ((j + 0.5) - height/2.0) / float(max) + 0.5;
     RayTree::Activate();
     if (traceRayFunction) traceRayFunction(x,y);
+    std::cout<<"glCanvas::keyboard:traceend"<<std::endl;
     RayTree::Deactivate();
     // redraw
     display();
@@ -274,6 +279,7 @@ void GLCanvas::keyboard(unsigned char key, int i, int j) {
   case 'g':  case 'G': {
     // toggle ray-grid march visualization
     visualize_grid_march = (visualize_grid_march+1)%3;
+    std::cout<<"glCanvas::keyboard:g"<<visualize_grid_march<<std::endl;
     // redraw
     display();
     break; }

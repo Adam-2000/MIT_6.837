@@ -107,7 +107,9 @@ public:
   ~CellFace() {}
 
   void paint() {
+    // std::cout<<"RayTree::CellFace:1.0"<<std::endl;
     material->glSetMaterial();
+    // std::cout<<"RayTree::CellFace:1.0"<<std::endl;
     glNormal3f(normal.x(),normal.y(),normal.z());
     glBegin(GL_QUADS);
     glVertex3f(a.x(),a.y(),a.z());
@@ -146,7 +148,9 @@ public:
   // ACCESSORS
   int getNumCellFaces() { return num_cellFaces; }
   CellFace getCellFace(int i) { 
+    // std::cout<<"rayTree:getCellFace"<< i <<std::endl;
     assert (i >= 0 && i < num_cellFaces);
+    // std::cout<<"rayTree:getCellFace"<< i <<std::endl;
     return cellFaces[i]; }
 
   // MODIFIERS

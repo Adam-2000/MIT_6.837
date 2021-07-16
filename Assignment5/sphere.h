@@ -62,12 +62,13 @@ public:
         int nx, ny, nz;
         Vec3f vec_min = bb->getMin();
         Vec3f vec_max = bb->getMax();
+        Vec3f dxyz = g->getDxyz();
         g->get_n(nx, ny, nz);
-        float dx = (vec_max.x() - vec_min.x()) / nx;
-        float dy = (vec_max.y() - vec_min.y()) / ny;
-        float dz = (vec_max.z() - vec_min.z()) / nz;
-        float big_radius = Vec3f(dx, dy, dz).Length() + radius;
-        float small_radius = -Vec3f(dx, dy, dz).Length() + radius;
+        float dx = dxyz.x();
+        float dy = dxyz.y();
+        float dz = dxyz.z();
+        float big_radius = Vec3f(dx/2, dy/2, dz/2).Length() + radius;
+        float small_radius = -Vec3f(dx/2, dy/2, dz/2).Length() + radius;
         float dist;
         Vec3f grid_center;
         for (int x = 0; x < nx; x++){
@@ -75,12 +76,16 @@ public:
                 for(int z = 0; z < nz; z++){
                     grid_center = vec_min + Vec3f((x + 0.5) * dx, (y + 0.5) * dy, (z + 0.5) * dz);
                     dist = (grid_center - center).Length();
+                    // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
                     if(dist <= big_radius && dist >= small_radius){
-                        g->set_array(true, x, y, z);
+                        g->add_object(this, x, y, z);
                     }
+                    // std::cout<<grid_center << " " << dist <<std::endl;
+                    // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
                 }
             }
         }
+        // g->setMaterial(this->m);
     }
 
     void paint();

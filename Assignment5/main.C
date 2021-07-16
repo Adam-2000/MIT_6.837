@@ -27,7 +27,6 @@ int main(int argc, char** argv){
     float weight = 0.1;
     bool grid_flag = false;
     int nxyz[3];
-    bool visual_grid_flag = false;
     bool shade_back_flag = false;
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
@@ -47,8 +46,6 @@ int main(int argc, char** argv){
             gouraud_flag = true;
         } else if (!strcmp(argv_glb[i],"-shade_back")) {
             shade_back_flag = true;
-        } else if (!strcmp(argv_glb[i],"-visualize_grid_flag")) {
-            visualize_grid_flag = true;
         } else if (!strcmp(argv_glb[i],"-shadows")) {
             shadow_flag = true;
         } else if (!strcmp(argv_glb[i],"-bounces")) {
@@ -57,7 +54,7 @@ int main(int argc, char** argv){
         } else if (!strcmp(argv_glb[i],"-weight")) {
             i++; assert (i < argc_glb); 
             weight = atof(argv_glb[i]);
-        } else if (!strcmp(argv_glb[i],"--grid")) {
+        } else if (!strcmp(argv_glb[i],"-grid")) {
             grid_flag = true;
             i++; assert (i < argc_glb); 
             nxyz[0] = atof(argv_glb[i]);
@@ -66,25 +63,18 @@ int main(int argc, char** argv){
             i++; assert (i < argc_glb); 
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
-            visual_grid_flag = true;
+            visualize_grid_flag = true;
         } else {
             ;   
         }
     }
-
-    for (int i = 1; i < argc; i++) {
-        if (!strcmp(argv[i],"-input")) {
-            i++; assert (i < argc); 
-            input_file = argv[i];
-        } else if (!strcmp(argv[i],"-gui")) {
-            gui_flag = true;
-        }
-    }
+    SceneParser scene = SceneParser(input_file);
+    glutInit(&argc, argv);
+    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz, visualize_grid_flag);
     if (gui_flag){
-        SceneParser scene = SceneParser(input_file);
-        glutInit(&argc, argv);
-        RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz);
+        
         GLCanvas glc = GLCanvas();
+        // std::cout<<"main.1: visualize_grid_flag: "<<visualize_grid_flag<<std::endl;
         glc.initialize(&scene, render, traceRayFunction, rtracer.getGrid(), visualize_grid_flag);
         // ;
     } else {

@@ -23,7 +23,7 @@ public:
   Object3DVector() {
     num_objects = 0;
     size = 10;
-    objects = new (Object3D*)[size];
+    objects = new Object3D*[size];
     for (int i = 0; i < size; i++)
       objects[i] = NULL;
   }
@@ -31,11 +31,14 @@ public:
   // DESTRUCTOR
   ~Object3DVector() {
     // don't delete the objects, just the array to store the pointers
-    delete [] objects;
+    // if(objects != NULL){
+    // delete [] objects;
+    //     objects = NULL;
+    // }
   }
 
   // ACCESSORS
-  int getNumObjects() { return num_objects; }
+  int getNumObjects() const { return num_objects; }
   Object3D* getObject(int i) { 
     assert (i >= 0 && i < num_objects);
     assert (objects[i] != NULL);
@@ -48,13 +51,13 @@ public:
     if (size == num_objects) {
       // double the size of the array and copy the pointers
       int new_size = size * 2;
-      Object3D **new_objects = new (Object3D*)[new_size];
+      Object3D **new_objects = new Object3D*[new_size];
       int i;
       for (i = 0; i < size; i++) {
-	new_objects[i] = objects[i];
+	      new_objects[i] = objects[i];
       }
       for (i = size; i < 2*size; i++) {
-	new_objects[i] = NULL;
+	      new_objects[i] = NULL;
       }
       delete [] objects;
       objects = new_objects;

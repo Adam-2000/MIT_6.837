@@ -74,6 +74,46 @@ public:
         glVertex3f(c.x(), c.y(), c.z());
         glEnd();
     }
+    void insertIntoGrid(Grid *g, Matrix *m){
+        BoundingBox* bb = g->getBoundingBox();
+        int nx, ny, nz;
+        g->get_n(nx, ny, nz);
+        Vec3f vec_min_grid = bb->getMin();
+        Vec3f vec_max_grid = bb->getMax();
+        Vec3f vec_min, vec_max;
+        Vec3f::Max(vec_min, this->bbox->getMin(), vec_min_grid);
+        Vec3f::Min(vec_max, this->bbox->getMax(), vec_max_grid);
+        Vec3f dxyz = g->getDxyz();
+        Vec3f nxyz = Vec3f(nx, ny, nz);
+        vec_min = (vec_min - vec_min_grid) / dxyz;
+        vec_max = (vec_max - vec_min_grid) / dxyz;
+        for (int i = 0; i < 3; i++){
+            vec_min[i] = floor(vec_min[i]);
+            if(vec_min[i] >= nxyz[i]){
+                vec_min[i] = nxyz[i] - 1;
+            }
+            vec_max[i] = floor(vec_max[i]);
+            if(vec_max[i] >= nxyz[i]){
+                vec_max[i] = nxyz[i] - 1;
+            }
+        }
+        
+        float dx = dxyz.x();
+        float dy = dxyz.y();
+        float dz = dxyz.z();
+        // Vec3f grid_corner;
+        for (int x = (int)vec_min.x(); x <= (int)vec_max.x(); x++){
+            for (int y = (int)vec_min.y(); y <= (int)vec_max.y(); y++){
+                for(int z = (int)vec_min.z(); z <= (int)vec_max.z(); z++){
+                    // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
+                    g->add_object(this, x, y, z);
+                    // std::cout<<grid_center << " " << dist <<std::endl;
+                    // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
+                }
+            }
+        }
+        // g->setMaterial(this->m);
+    }
 private:
 
     Vec3f a;

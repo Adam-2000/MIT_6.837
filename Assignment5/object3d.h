@@ -21,6 +21,7 @@ public:
     virtual bool intersect(const Ray &r, Hit &h, float tmin) = 0;
     virtual void paint() = 0;
     virtual BoundingBox* getBoundingBox(){ return bbox; }
+    virtual Material* getMaterial()const{return m;}
     virtual void insertIntoGrid(Grid *g, Matrix *m){}
 protected:
 

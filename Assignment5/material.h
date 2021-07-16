@@ -26,6 +26,7 @@ public:
   virtual ~Material() {}
 
   // ACCESSORS
+  virtual void setDiffuseColor(const Vec3f &diffuseColor) {this->diffuseColor = diffuseColor;}
   virtual Vec3f getDiffuseColor() const { return diffuseColor; }
   virtual Vec3f getSpecularColor() const = 0;
   virtual Vec3f getReflectiveColor() const = 0;
@@ -57,7 +58,7 @@ public:
     this->diffuseColor = diffuseColor;
   }
   ~PhongMaterial() {}
-
+  void setDiffuseColor(const Vec3f &diffuseColor) {this->diffuseColor = diffuseColor;}
   // ACCESSORS
   Vec3f getDiffuseColor() const { return diffuseColor; }
   Vec3f getSpecularColor() const { return specularColor; }

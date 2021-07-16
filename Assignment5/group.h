@@ -31,7 +31,7 @@ public:
             this->obj[index] = obj;
             if (obj->getBoundingBox() != NULL){
                 if (this->bbox == NULL){
-                    this->bbox = new BoundingBox(*obj->getBoundingBox());
+                    this->bbox = new BoundingBox(obj->getBoundingBox()->getMin(), obj->getBoundingBox()->getMax());
                 } else {
                     this->bbox->Extend(obj->getBoundingBox());
                 }

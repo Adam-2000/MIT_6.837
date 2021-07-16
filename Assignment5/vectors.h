@@ -157,6 +157,9 @@ public:
   float operator[](int i) const { 
     assert (i >= 0 && i < 3); 
     return data[i]; }
+  float& operator[](int i) { 
+    assert (i >= 0 && i < 3); 
+    return data[i]; }
   float x() const { return data[0]; }
   float y() const { return data[1]; }
   float z() const { return data[2]; }
@@ -241,6 +244,9 @@ public:
     data[1] /= f;
     data[2] /= f;
     return *this; }
+  Vec3f operator/(const Vec3f &vec) const {
+    
+    return Vec3f(data[0] / vec.x(), data[1] / vec.y(), data[2] / vec.z()); }
 
   Vec3f operator-()const{
     return Vec3f(-data[0], -data[1], -data[2]);

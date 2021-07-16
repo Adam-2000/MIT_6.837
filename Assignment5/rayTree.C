@@ -72,8 +72,11 @@ void RayTree::paint() {
 
 void RayTree::paintHitCells() {
   // paint the affected cells!
+  // std::cout<<"RayTree::paintHitCells:0.0"<<hit_cells.getNumCellFaces()<<std::endl;
   for (int i = 0; i < hit_cells.getNumCellFaces(); i++) {
+    // std::cout<<"RayTree::paintHitCells:1.0"<<i<<std::endl;
     hit_cells.getCellFace(i).paint(); }
+    // std::cout<<"RayTree::paintHitCells:2.0"<<std::endl;
 }
 
 // ====================================================================

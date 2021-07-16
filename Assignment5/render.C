@@ -19,7 +19,7 @@ char** argv_glb;
 #define N_LARGE 10000
 #define EPSILON 0.001
 void traceRayFunction(float x, float y){
-    // std::cout << "render:" << std::endl;
+    std::cout << "traceRayFunction:0" << std::endl;
     char *input_file = NULL;
 
     bool shade_back_flag = false;
@@ -29,7 +29,7 @@ void traceRayFunction(float x, float y){
     float weight = 0.1;
     bool grid_flag = false;
     int nxyz[3];
-    bool visual_grid_flag = false;
+    bool visualize_grid_flag = false;
 
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
@@ -64,29 +64,30 @@ void traceRayFunction(float x, float y){
             i++; assert (i < argc_glb); 
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
-            visual_grid_flag = true;
+            visualize_grid_flag = true;
         } else {
             ;
         }
     }
 
-    std::cout << "render:0" << std::endl;
+    // std::cout << "render:0" << std::endl;
     SceneParser scene = SceneParser(input_file);
-    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz);
+    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz, visualize_grid_flag);
 
     Camera* cam = scene.getCamera();
-    std::cout << "render:1" << std::endl;
+    // std::cout << "render:1" << std::endl;
     Ray r = cam->generateRay(Vec2f(x, y));
     Hit h = Hit(N_LARGE, NULL, Vec3f());;
     float tmin = cam->getTMin();
 
     rtracer.traceRay(r, tmin, 0, 1.0, 1.0, h);
+    std::cout << "traceRayFunction:1" << std::endl;
     if (h.getT() + EPSILON >= N_LARGE){
         RayTree::SetMainSegment(r, 0, 20);
     } else {
         RayTree::SetMainSegment(r, 0, h.getT());
     }
-    
+    std::cout << "traceRayFunction:end" << std::endl;
 
 }
 void render(){
@@ -106,7 +107,7 @@ void render(){
     float weight = 0.1;
     bool grid_flag = false;
     int nxyz[3];
-    bool visual_grid_flag = false;
+    bool visualize_grid_flag = false;
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
 
@@ -160,7 +161,7 @@ void render(){
             i++; assert (i < argc_glb); 
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
-            visual_grid_flag = true;
+            visualize_grid_flag = true;
         } else {
             printf ("whoops error with command line argument %d: '%s'\n",i,argv_glb[i]);
             assert(0);
@@ -169,7 +170,7 @@ void render(){
 
     SceneParser scene = SceneParser(input_file);
     // std::cout << shadow_flag << std::endl;
-    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz);
+    RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz, visualize_grid_flag);
 
     Image img_output = Image(width, height);
     Image img_depth = Image(width, height);

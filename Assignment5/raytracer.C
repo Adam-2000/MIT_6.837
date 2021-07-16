@@ -30,7 +30,7 @@ bool transmittedDirection(const Vec3f &normal, const Vec3f &incoming,
 
 Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight, 
                  float indexOfRefraction, Hit &h) const{
-                
+    // std::cout << "traceRay:0.0" << std::endl;
     Vec3f back_color = s->getBackgroundColor();
     Vec3f ambient_light_color = s->getAmbientLight();
     Group* g = s->getGroup();
@@ -68,7 +68,18 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     bool inside = false;
     float index_out, index_in;
     // float tstop = LONG_RAY;
-    if (g->intersect(r, h, tmin)){
+    bool int_flag = false;
+    // std::cout << "traceRay:0.2:"<<visualize_grid_flag << std::endl;
+    if (!visualize_grid_flag){
+        int_flag = g->intersect(r, h, tmin); 
+    } else {
+        int_flag = this->g->intersect(r, h, tmin); 
+    }
+    // std::cout << "traceRay:1.0" << std::endl;
+    // int_flag = this->g->intersect(r, h, tmin); 
+    // int_flag = g->intersect(r, h, tmin); 
+    // std::cout << "traceRay:int_flag::" << int_flag<< std::endl;
+    if (int_flag){
         p_insct = h.getIntersectionPoint();
         m = h.getMaterial();
         color_obj = m->getDiffuseColor();
@@ -148,7 +159,7 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     // if (bounces == 0){
     //     RayTree::SetMainSegment(r, 0, tstop);
     // }
-    
+    // std::cout << "traceRay:end" << ret_color<<std::endl;
     return ret_color;
 }
 
