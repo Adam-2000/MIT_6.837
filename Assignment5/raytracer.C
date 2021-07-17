@@ -69,8 +69,8 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     float index_out, index_in;
     // float tstop = LONG_RAY;
     bool int_flag = false;
-    // std::cout << "traceRay:0.2:"<<visualize_grid_flag << std::endl;
-    if (!visualize_grid_flag){
+    // std::cout << "traceRay:0.2:"<<visualize_grid_flag << grid_flag<< std::endl;
+    if (!grid_flag){
         int_flag = g->intersect(r, h, tmin); 
     } else {
         int_flag = this->g->intersect(r, h, tmin); 

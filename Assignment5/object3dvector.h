@@ -32,7 +32,7 @@ public:
   ~Object3DVector() {
     // don't delete the objects, just the array to store the pointers
     // if(objects != NULL){
-    // delete [] objects;
+    delete [] objects;
     //     objects = NULL;
     // }
   }

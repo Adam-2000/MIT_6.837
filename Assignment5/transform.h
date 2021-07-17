@@ -79,6 +79,25 @@ public:
         obj->paint();
         glPopMatrix();
     }
+    void insertIntoGrid(Grid *g, Matrix *m){
+        // std::cout<<"Transform::insertIntoGrid:0"<<std::endl;
+        if (m == NULL){
+            m = new Matrix;
+            *m = mat;
+            // std::cout<<"Transform::insertIntoGrid::mnew::"<<*m<<std::endl;
+            obj->insertIntoGrid(g, m);
+            delete m;
+            m = NULL;
+        } else {
+            // std::cout<<"Transform::insertIntoGrid::mold::"<<*m<<std::endl;
+            *m = (*m) * mat;
+            // std::cout<<"Transform::insertIntoGrid::mnew::"<<*m<<std::endl;
+            obj->insertIntoGrid(g, m);
+            *m = (*m) * inv_m;
+            // std::cout<<"Transform::insertIntoGrid::mafter::"<<*m<<std::endl;
+        }
+        
+    }
 private:
 
     Object3D* obj;

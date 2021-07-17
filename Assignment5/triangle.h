@@ -75,14 +75,33 @@ public:
         glEnd();
     }
     void insertIntoGrid(Grid *g, Matrix *m){
+        // std::cout <<"triangle::insertintogrid::0" <<std::endl;
         BoundingBox* bb = g->getBoundingBox();
         int nx, ny, nz;
         g->get_n(nx, ny, nz);
+        
         Vec3f vec_min_grid = bb->getMin();
         Vec3f vec_max_grid = bb->getMax();
         Vec3f vec_min, vec_max;
-        Vec3f::Max(vec_min, this->bbox->getMin(), vec_min_grid);
-        Vec3f::Min(vec_max, this->bbox->getMax(), vec_max_grid);
+        Vec3f _vec_min = this->bbox->getMin();
+        Vec3f _vec_max = this->bbox->getMax();
+        if(m != NULL){
+            Vec3f _a = a, _b = b, _c = c;
+            // std::cout <<"triangle::insertintogrid::abc::" << _a << _b << _c <<std::endl;
+            m->TransformPoint(_a);
+            m->TransformPoint(_b);
+            m->TransformPoint(_c);
+            Vec3f::Min(_vec_min, _a, _b);
+            Vec3f::Min(_vec_min, _vec_min, _c);
+            Vec3f::Max(_vec_max, _a, _b);
+            Vec3f::Max(_vec_max, _vec_max, _c);
+            // std::cout <<"triangle::insertintogrid::_abc::" << _a << _b << _c <<std::endl;
+        }
+        
+        // std::cout <<"triangle::insertintogrid::_vec_min::" << _vec_min <<std::endl;
+        // std::cout <<"triangle::insertintogrid::_vec_max::" << _vec_max <<std::endl;
+        Vec3f::Max(vec_min, _vec_min, vec_min_grid);
+        Vec3f::Min(vec_max, _vec_max, vec_max_grid);
         Vec3f dxyz = g->getDxyz();
         Vec3f nxyz = Vec3f(nx, ny, nz);
         vec_min = (vec_min - vec_min_grid) / dxyz;
@@ -102,10 +121,15 @@ public:
         float dy = dxyz.y();
         float dz = dxyz.z();
         // Vec3f grid_corner;
+        // std::cout <<"triangle::insertintogrid::vec_min_grid::" << vec_min_grid <<std::endl;
+        // std::cout <<"triangle::insertintogrid::vec_max_grid::" << vec_max_grid <<std::endl;
+        // std::cout <<"triangle::insertintogrid::vec_min::" << vec_min <<std::endl;
+        // std::cout <<"triangle::insertintogrid::vec_max::" << vec_max <<std::endl;
         for (int x = (int)vec_min.x(); x <= (int)vec_max.x(); x++){
             for (int y = (int)vec_min.y(); y <= (int)vec_max.y(); y++){
                 for(int z = (int)vec_min.z(); z <= (int)vec_max.z(); z++){
                     // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
+                    // std::cout <<"triangle::insertintogrid::xyz::" << x << y << z <<std::endl;
                     g->add_object(this, x, y, z);
                     // std::cout<<grid_center << " " << dist <<std::endl;
                     // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;

@@ -52,7 +52,7 @@ void Grid::paint(){
             coord_z = vec_min.z();
             for(int z = 0; z < nz; z++, coord_z += dz){
                 // std::cout<< Vec3f(x,y,z)<<Vec3f(coord_x, coord_y, coord_z)<<get_array(x, y, z)<<std::endl;
-                n_obj = get_array(x, y, z).getNumObjects();
+                n_obj = get_array(x, y, z)->getNumObjects();
                 if (n_obj > 0){
                     // color_gradient = Vec3f(1,1,1);
                     // if (n_obj > 1){
@@ -66,7 +66,7 @@ void Grid::paint(){
                     // get_array(x,y,z).getObject(0)->getMaterial()->glSetMaterial();
                     if (x == 0){
                         goto DRAW_X_1;
-                    } else if(!get_array(x - 1, y, z).getNumObjects()){
+                    } else if(!get_array(x - 1, y, z)->getNumObjects()){
                         // std::cout<<"grid:paint:1.111"<<std::endl;
                         DRAW_X_1:
                         glNormal3f(-1, 0, 0);
@@ -78,7 +78,7 @@ void Grid::paint(){
                     // std::cout<<"grid:paint:1.11"<<std::endl;
                     if(x == nx - 1){
                         goto DRAW_X_2;
-                    } else if(!get_array(x + 1, y, z).getNumObjects()){
+                    } else if(!get_array(x + 1, y, z)->getNumObjects()){
                         // std::cout<<"grid:paint:1.12"<<std::endl;
                         DRAW_X_2:
                         glNormal3f(1, 0, 0);
@@ -90,7 +90,7 @@ void Grid::paint(){
                     // std::cout<<"grid:paint:1.13"<<std::endl;
                     if (y == 0){
                         goto DRAW_Y_1;
-                    } else if(!get_array(x, y - 1, z).getNumObjects()){
+                    } else if(!get_array(x, y - 1, z)->getNumObjects()){
                         DRAW_Y_1:
                         glNormal3f(0, -1, 0);
                         glVertex3f(coord_x, coord_y, coord_z);
@@ -100,7 +100,7 @@ void Grid::paint(){
                     }
                     if(y == ny - 1){
                         goto DRAW_Y_2;
-                    } else if(!get_array(x, y + 1, z).getNumObjects()){
+                    } else if(!get_array(x, y + 1, z)->getNumObjects()){
                         DRAW_Y_2:
                         glNormal3f(0, 1, 0);
                         glVertex3f(coord_x, coord_y + dy, coord_z);
@@ -110,7 +110,7 @@ void Grid::paint(){
                     }
                     if (z == 0){
                         goto DRAW_Z_1;
-                    } else if(!get_array(x, y, z - 1).getNumObjects()){
+                    } else if(!get_array(x, y, z - 1)->getNumObjects()){
                         DRAW_Z_1:
                         glNormal3f(0, 0, 1);
                         glVertex3f(coord_x, coord_y, coord_z);
@@ -120,7 +120,7 @@ void Grid::paint(){
                     }
                     if(z == nz - 1){
                         goto DRAW_Z_2;
-                    } else if(!get_array(x, y, z + 1).getNumObjects()){
+                    } else if(!get_array(x, y, z + 1)->getNumObjects()){
                         DRAW_Z_2:
                         glNormal3f(0, 0, -1);
                         glVertex3f(coord_x, coord_y, coord_z + dz);

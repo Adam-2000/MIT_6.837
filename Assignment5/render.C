@@ -19,7 +19,7 @@ char** argv_glb;
 #define N_LARGE 10000
 #define EPSILON 0.001
 void traceRayFunction(float x, float y){
-    std::cout << "traceRayFunction:0" << std::endl;
+    // std::cout << "traceRayFunction:0: "<<x << " "<< y << std::endl;
     char *input_file = NULL;
 
     bool shade_back_flag = false;
@@ -81,13 +81,13 @@ void traceRayFunction(float x, float y){
     float tmin = cam->getTMin();
 
     rtracer.traceRay(r, tmin, 0, 1.0, 1.0, h);
-    std::cout << "traceRayFunction:1" << std::endl;
+    // std::cout << "traceRayFunction:1" << std::endl;
     if (h.getT() + EPSILON >= N_LARGE){
         RayTree::SetMainSegment(r, 0, 20);
     } else {
         RayTree::SetMainSegment(r, 0, h.getT());
     }
-    std::cout << "traceRayFunction:end" << std::endl;
+    // std::cout << "traceRayFunction:end" << std::endl;
 
 }
 void render(){

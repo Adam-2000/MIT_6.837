@@ -39,12 +39,26 @@ public:
     void nextCell(){
         // std::cout<<"nextcell:0"<<ijk<<std::endl;
         int next_idx = 0;
-        float temp_t = t_next[0];
-        if (t_next[1] < temp_t){
+        float temp_t;
+        temp_t = t_next[0];
+        if((int)sign[0] == 0){
+            if((int)sign[1] == 0){
+                if((int)sign[2] == 0){
+                    // std::cout<<"grid:nextCell: Why all 0?" << std::endl;
+                }
+                next_idx = 2;
+                temp_t = t_next[2];
+            } else {
+                next_idx = 1;
+                temp_t = t_next[1];
+            }
+        }
+        
+        if (t_next[1] < temp_t && (int)sign[1] != 0){
             temp_t = t_next[1];
             next_idx = 1;
         }
-        if (t_next[2] < temp_t){
+        if (t_next[2] < temp_t && (int)sign[2] != 0){
             temp_t = t_next[2];
             next_idx = 2;
         }
@@ -87,7 +101,7 @@ public:
         visualize_grid_flag = true;
         // std::cout<<"grid constructor:" << nx << ny << nz << bb->getMin() << bb->getMax() <<std::endl;
     }
-    ~Grid(){delete [] occ_array;}
+    // ~Grid(){delete [] occ_array;}
 
     // void set_array(Object3D* val, int x, int y, int z){
     //     occ_array[x * ny * nz + y * nz + z] = val;
@@ -95,8 +109,8 @@ public:
     void add_object(Object3D* val, int x, int y, int z){
         occ_array[x * ny * nz + y * nz + z].addObject(val);
     }
-    const Object3DVector &get_array(int x, int y, int z){
-        return occ_array[x * ny * nz + y * nz + z];
+    Object3DVector* get_array(int x, int y, int z){
+        return &occ_array[x * ny * nz + y * nz + z];
     }
     void ChangeColor(int n){
         Vec3f color_gradient = Vec3f(1,1,1);
@@ -122,9 +136,11 @@ public:
             return false;
             // std::cout << "grid::intersect::return:1" << std::endl;
         }
+        
         Vec3f ijk = mi.getIjk();
+        // std::cout << "grid::intersect::mi.getHitidx()"<<mi.getHitidx()<<ijk << std::endl;
         Vec3f vec_min = bbox->getMin();
-        Object3DVector o3v;
+
         bool flag;
         int cnt = 0;
         Vec3f normal;
@@ -185,24 +201,24 @@ public:
                 default : assert(0);
             }
             // std::cout<<"grid::intersect:ijk"<<ijk<<std::endl;
-            o3v = get_array(ijk.x(), ijk.y(), ijk.z());
             // if(visualize_grid_flag){
-            if(1){
-                if(o3v.getNumObjects() > 0){
-                    ChangeColor(o3v.getNumObjects());
+            // std::cout<<"grid::intersect:visualize_grid_flag:s"<<visualize_grid_flag<<std::endl;
+            if(visualize_grid_flag){
+                if(get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects() > 0){
+                    ChangeColor(get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects());
                     h.set(tmin, m, normal, r);
                     // std::cout << "grid::intersect::return:2" << std::endl;
                     return true;
                 }
             } else{
                 flag = false;
-                for (int i = 0; i < o3v.getNumObjects(); i++){
-                    flag |= o3v.getObject(i)->intersect(r, h, tmin);
+                for (int i = 0; i < get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects(); i++){
+                    flag |= get_array(ijk.x(), ijk.y(), ijk.z())->getObject(i)->intersect(r, h, tmin);
                 }
                 if(flag){
                     return true;
+                    // std::cout<<"grid::intersect::return:3"<<std::endl;
                 }
-                // std::cout<<"grid::intersect:o3v"<<o3v.getNumObjects()<<std::endl;
             }
             
             
@@ -213,7 +229,7 @@ public:
             cnt++;
             // assert(cnt < 5);
         }
-        // std::cout << "grid::intersect::return:3" << std::endl;
+        // std::cout << "grid::intersect::return:4" << std::endl;
         return false;
 
 
@@ -241,6 +257,7 @@ public:
                 sign[i] = 1;
             } else if (dir[i] == 0){
                 sign[i] = 0;
+                // sign[i] = -1;
             } else if (dir[i] < 0){
                 sign[i] = -1;
             }
@@ -281,7 +298,7 @@ public:
         
         // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
         mi.setHitidx(-1);
-        if (t_max < tmin){
+        if (t_max < tmin || t_max < t_min){
             mi.setTmin(t_max);
             return;
         } else if (t_min >= tmin){
