@@ -3,7 +3,7 @@
 
 #include "object3d.h"
 #include "vectors.h"
-
+#include "raytracing_stats.h"
 #define NUM_BIG 1000
 class Plane: public Object3D{
 
@@ -14,6 +14,7 @@ public:
     ~Plane(){}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
+        RayTracingStats::IncrementNumIntersections(); 
         float t_ = (d - normal.Dot3(r.getOrigin())) / normal.Dot3(r.getDirection());
         if (t_ >= tmin && t_ < h.getT()){
             // if (normal.Dot3(r.getDirection()) <= 0){
@@ -25,6 +26,9 @@ public:
             return true;
         }
         return false;
+    }
+    void insertIntoGrid(Grid *g, Matrix *m){
+        g->add_extra_object(this);
     }
     void paint(){
         this->m->glSetMaterial();
@@ -46,8 +50,8 @@ public:
         glNormal3f(normal.x(), normal.y(), normal.z());
         glVertex3f(vec_1.x(), vec_1.y(), vec_1.z());
         glVertex3f(vec_2.x(), vec_2.y(), vec_2.z());
-        glVertex3f(vec_3.x(), vec_3.y(), vec_3.z());
         glVertex3f(vec_4.x(), vec_4.y(), vec_4.z());
+        glVertex3f(vec_3.x(), vec_3.y(), vec_3.z());
         glEnd();
     }
 

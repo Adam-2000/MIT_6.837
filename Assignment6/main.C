@@ -28,6 +28,7 @@ int main(int argc, char** argv){
     bool grid_flag = false;
     int nxyz[3];
     bool shade_back_flag = false;
+    bool stats_flag = false;
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
 
@@ -64,6 +65,8 @@ int main(int argc, char** argv){
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
             visualize_grid_flag = true;
+        } else if (!strcmp(argv_glb[i],"-stats")) {
+            stats_flag = true;
         } else {
             ;   
         }
@@ -78,7 +81,9 @@ int main(int argc, char** argv){
         glc.initialize(&scene, render, traceRayFunction, rtracer.getGrid(), visualize_grid_flag);
         // ;
     } else {
+        // std::cout<<"main.1: before_render: "<<std::endl;
         render();
+        // std::cout<<"main.1: after_render: "<<std::endl;
     }
 
     return 0;

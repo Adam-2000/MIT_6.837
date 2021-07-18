@@ -6,6 +6,7 @@
 #include <cmath>
 #include "grid.h"
 #include "matrix.h"
+#include "raytracing_stats.h"
 #define PI 3.141592653589793238462 
 extern int theta_steps;
 extern int phi_steps;
@@ -23,6 +24,7 @@ public:
     ~Sphere(){delete this->bbox; this->bbox = NULL;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
+        RayTracingStats::IncrementNumIntersections(); 
         Vec3f Ro = center - r.getOrigin();
         float Ro2 = Ro.Dot3(Ro);
         float r2 = radius * radius;
@@ -79,7 +81,7 @@ public:
             m->TransformPoint(vec_min_new);
             m->TransformPoint(vec_max_new);
             Vec3f vec_new;
-            for (int i; i < 8; i++){
+            for (int i = 0; i < 8; i++){
                 vec_new = Vec3f(i & 4 ? vec_max_obj.x() : vec_min_obj.x(), 
                                 i & 2 ? vec_max_obj.y() : vec_min_obj.y(),
                                 i & 1 ? vec_max_obj.z() : vec_min_obj.z());

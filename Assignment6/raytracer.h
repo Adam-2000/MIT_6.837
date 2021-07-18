@@ -15,6 +15,7 @@ public:
     RayTracer(SceneParser *s, int max_bounces, float cutoff_weight, bool shadows, bool shade_back_flag, bool grid_flag, int* nxyz, bool visualize_grid_flag):
                 s(s), max_bounces(max_bounces), cutoff_weight(cutoff_weight), shadows(shadows), shade_back_flag(shade_back_flag), grid_flag(grid_flag){
         this->visualize_grid_flag = false;
+        g = NULL;
         if (grid_flag){
             g = new Grid(s->getGroup()->getBoundingBox(), nxyz[0], nxyz[1], nxyz[2]);
             s->getGroup()->insertIntoGrid(g, NULL);

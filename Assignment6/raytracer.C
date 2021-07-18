@@ -6,7 +6,7 @@
 #include "hit.h"
 #include "material.h"
 #include "rayTree.h"
-
+#include "raytracing_stats.h"
 #define EPSILON 0.001
 #define LONG_RAY 20
 #define N_LARGE 10000
@@ -75,6 +75,7 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     } else {
         int_flag = this->g->intersect(r, h, tmin); 
     }
+    RayTracingStats::IncrementNumNonShadowRays();
     // std::cout << "traceRay:1.0" << std::endl;
     // int_flag = this->g->intersect(r, h, tmin); 
     // int_flag = g->intersect(r, h, tmin); 
@@ -102,6 +103,7 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
                 ray_shadow = Ray(p_insct, dir_light);
                 hit_shadow = Hit(N_LARGE, NULL, Vec3f());
                 // std::cout<<dir_light;
+                RayTracingStats::IncrementNumShadowRays();
                 if (g->intersect(ray_shadow, hit_shadow, EPSILON)){
                     // std::cout<<"1";
                     RayTree::AddShadowSegment(ray_shadow, 0, hit_shadow.getT());

@@ -14,6 +14,7 @@
 #include "sphere.h"
 #include "raytracer.h"
 #include "rayTree.h"
+#include "raytracing_stats.h"
 int argc_glb;
 char** argv_glb;
 #define N_LARGE 10000
@@ -30,7 +31,7 @@ void traceRayFunction(float x, float y){
     bool grid_flag = false;
     int nxyz[3];
     bool visualize_grid_flag = false;
-
+    bool stats_flag = false;
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
 
@@ -65,6 +66,8 @@ void traceRayFunction(float x, float y){
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
             visualize_grid_flag = true;
+        // } else if (!strcmp(argv_glb[i],"-stats")) {
+            // stats_flag = true;
         } else {
             ;
         }
@@ -106,8 +109,9 @@ void render(){
     int bounces = 0;
     float weight = 0.1;
     bool grid_flag = false;
-    int nxyz[3];
+    int nxyz[3] = {0, 0, 0};
     bool visualize_grid_flag = false;
+    bool stats_flag = false;
     // sample command line:
     // raytracer -input scene1_1.txt -size 200 200 -output output1_1.tga -depth 9 10 depth1_1.tga
 
@@ -162,14 +166,17 @@ void render(){
             nxyz[2] = atof(argv_glb[i]);
         } else if (!strcmp(argv_glb[i],"-visualize_grid")) {
             visualize_grid_flag = true;
+        } else if (!strcmp(argv_glb[i],"-stats")) {
+            stats_flag = true;
         } else {
             printf ("whoops error with command line argument %d: '%s'\n",i,argv_glb[i]);
             assert(0);
         }
     }
-
+    
     SceneParser scene = SceneParser(input_file);
     // std::cout << shadow_flag << std::endl;
+    RayTracingStats::Initialize(width, height, scene.getGroup()->getBoundingBox(), nxyz[0], nxyz[1], nxyz[2]);
     RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz, visualize_grid_flag);
 
     Image img_output = Image(width, height);
@@ -200,6 +207,9 @@ void render(){
                 img_depth.SetPixel(j, i, white *  ((depth_max - t) / (depth_max - depth_min)));
             }
         }
+    }
+    if(stats_flag){
+        RayTracingStats::PrintStatistics();
     }
     img_output.SaveTGA(output_file);
     if (depth_file != NULL){

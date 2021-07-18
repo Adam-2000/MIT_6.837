@@ -6,7 +6,8 @@
 #include "ray.h"
 #include "rayTree.h"
 #include "object3dvector.h"
-
+#include "raytracing_stats.h"
+#define EPSILON 0.001
 static PhongMaterial m_static = PhongMaterial(Vec3f(1,1,1), Vec3f(1,1,1), 100, Vec3f(0.1,0.1,0.1), Vec3f(0.1,0.1,0.1), 1.0);
 
 
@@ -38,6 +39,7 @@ public:
     int getHitidx(){return hit_idx;}
     void nextCell(){
         // std::cout<<"nextcell:0"<<ijk<<std::endl;
+        RayTracingStats::IncrementNumGridCellsTraversed();
         int next_idx = 0;
         float temp_t;
         temp_t = t_next[0];
@@ -101,13 +103,16 @@ public:
         visualize_grid_flag = true;
         // std::cout<<"grid constructor:" << nx << ny << nz << bb->getMin() << bb->getMax() <<std::endl;
     }
-    // ~Grid(){delete [] occ_array;}
+    ~Grid(){delete [] occ_array;}
 
     // void set_array(Object3D* val, int x, int y, int z){
     //     occ_array[x * ny * nz + y * nz + z] = val;
     // }
     void add_object(Object3D* val, int x, int y, int z){
         occ_array[x * ny * nz + y * nz + z].addObject(val);
+    }
+    void add_extra_object(Object3D* val){
+        extra_objs.addObject(val);
     }
     Object3DVector* get_array(int x, int y, int z){
         return &occ_array[x * ny * nz + y * nz + z];
@@ -130,10 +135,17 @@ public:
     }
     bool intersect(const Ray &r, Hit &h, float tmin){
         // std::cout << "grid::intersect::0.0" << std::endl;
+        RayTracingStats::IncrementNumIntersections(); 
         MarchingInfo mi;
         initializeRayMarch(mi, r, tmin);
+        bool extra_flag = false;
+        if(!visualize_grid_flag){
+            for(int i = 0; i < extra_objs.getNumObjects(); i++){
+                extra_flag = extra_objs.getObject(i)->intersect(r, h, tmin);
+            }
+        }
         if (mi.getHitidx() == -1){
-            return false;
+            return extra_flag;
             // std::cout << "grid::intersect::return:1" << std::endl;
         }
         
@@ -141,7 +153,7 @@ public:
         // std::cout << "grid::intersect::mi.getHitidx()"<<mi.getHitidx()<<ijk << std::endl;
         Vec3f vec_min = bbox->getMin();
 
-        bool flag;
+        // bool flag;
         int cnt = 0;
         Vec3f normal;
         Vec3f p_grid;
@@ -153,6 +165,11 @@ public:
         Vec3f _vec5 = Vec3f(dxyz.x(), 0, dxyz.z());
         Vec3f _vec6 = Vec3f(dxyz.x(), dxyz.y(), 0);
         Vec3f _vec7 = Vec3f(dxyz.x(), dxyz.y(), dxyz.z());
+        Vec3f tnext_xyz; 
+        float temp_t;
+        // flag = false;
+        // Vec3f t_next;
+        // float min_t_next;
         while(ijk.x() >= 0 && ijk.x() < nx && ijk.y() >= 0 && ijk.y() < ny && ijk.z() < nz && ijk.z() >= 0){
             // std::cout <<cnt<< "   grid::ijk:  " <<ijk<< std::endl;
             p_grid = vec_min + dxyz * ijk;
@@ -163,47 +180,48 @@ public:
             vec5 = p_grid + _vec5;
             vec6 = p_grid + _vec6;
             vec7 = p_grid + _vec7;
-            RayTree::AddHitCellFace(p_grid, vec1, vec3, vec2, Vec3f(-1, 0, 0), m);
-            RayTree::AddHitCellFace(p_grid, vec1, vec5, vec4, Vec3f(0, -1, 0), m);
-            RayTree::AddHitCellFace(p_grid, vec2, vec6, vec4, Vec3f(0, 0, 1), m);
-            RayTree::AddHitCellFace(vec7, vec6, vec4, vec5, Vec3f(1, 0, 0), m);
-            RayTree::AddHitCellFace(vec7, vec6, vec2, vec3, Vec3f(0, 1, 0), m);
-            RayTree::AddHitCellFace(vec7, vec5, vec1, vec3, Vec3f(0, 0, -1), m);
+            if(visualize_grid_flag){
+                RayTree::AddHitCellFace(p_grid, vec1, vec3, vec2, Vec3f(-1, 0, 0), m);
+                RayTree::AddHitCellFace(p_grid, vec1, vec5, vec4, Vec3f(0, -1, 0), m);
+                RayTree::AddHitCellFace(p_grid, vec2, vec6, vec4, Vec3f(0, 0, 1), m);
+                RayTree::AddHitCellFace(vec7, vec6, vec4, vec5, Vec3f(1, 0, 0), m);
+                RayTree::AddHitCellFace(vec7, vec6, vec2, vec3, Vec3f(0, 1, 0), m);
+                RayTree::AddHitCellFace(vec7, vec5, vec1, vec3, Vec3f(0, 0, -1), m);
+            
             // std::cout<<"grid::intersect:res"<<mi.getHitidx()<<std::endl;
-            switch (mi.getHitidx()){
-                case 6:
-                    goto LOOP_TAIL;
-                    break;
-                case 0: 
-                    normal.Set(-1, 0, 0);
-                    RayTree::AddEnteredFace(p_grid, vec1, vec3, vec2, Vec3f(-1, 0, 0), m);
-                    break;
-                case 1: 
-                    normal.Set(0, -1, 0);
-                    RayTree::AddEnteredFace(p_grid, vec1, vec5, vec4, Vec3f(0, -1, 0), m);
-                    break;
-                case 2: 
-                    normal.Set(0, 0, -1);
-                    RayTree::AddEnteredFace(p_grid, vec2, vec6, vec4, Vec3f(0, 0, 1), m);
-                    break;
-                case 3: 
-                    normal.Set(1, 0, 0);
-                    RayTree::AddEnteredFace(vec7, vec6, vec4, vec5, Vec3f(1, 0, 0), m);
-                    break;
-                case 4: 
-                    normal.Set(0, 1, 0);
-                    RayTree::AddEnteredFace(vec7, vec6, vec2, vec3, Vec3f(0, 1, 0), m);
-                    break;
-                case 5: 
-                    normal.Set(0, 0, 1);
-                    RayTree::AddEnteredFace(vec7, vec5, vec1, vec3, Vec3f(0, 0, -1), m);
-                    break;
-                default : assert(0);
-            }
+                switch (mi.getHitidx()){
+                    case 6:
+                        goto LOOP_TAIL;
+                        break;
+                    case 0: 
+                        normal.Set(-1, 0, 0);
+                        RayTree::AddEnteredFace(p_grid, vec1, vec3, vec2, Vec3f(-1, 0, 0), m);
+                        break;
+                    case 1: 
+                        normal.Set(0, -1, 0);
+                        RayTree::AddEnteredFace(p_grid, vec1, vec5, vec4, Vec3f(0, -1, 0), m);
+                        break;
+                    case 2: 
+                        normal.Set(0, 0, -1);
+                        RayTree::AddEnteredFace(p_grid, vec2, vec6, vec4, Vec3f(0, 0, 1), m);
+                        break;
+                    case 3: 
+                        normal.Set(1, 0, 0);
+                        RayTree::AddEnteredFace(vec7, vec6, vec4, vec5, Vec3f(1, 0, 0), m);
+                        break;
+                    case 4: 
+                        normal.Set(0, 1, 0);
+                        RayTree::AddEnteredFace(vec7, vec6, vec2, vec3, Vec3f(0, 1, 0), m);
+                        break;
+                    case 5: 
+                        normal.Set(0, 0, 1);
+                        RayTree::AddEnteredFace(vec7, vec5, vec1, vec3, Vec3f(0, 0, -1), m);
+                        break;
+                    default : assert(0);
+                }
             // std::cout<<"grid::intersect:ijk"<<ijk<<std::endl;
             // if(visualize_grid_flag){
             // std::cout<<"grid::intersect:visualize_grid_flag:s"<<visualize_grid_flag<<std::endl;
-            if(visualize_grid_flag){
                 if(get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects() > 0){
                     ChangeColor(get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects());
                     h.set(tmin, m, normal, r);
@@ -211,13 +229,18 @@ public:
                     return true;
                 }
             } else{
-                flag = false;
+
                 for (int i = 0; i < get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects(); i++){
-                    flag |= get_array(ijk.x(), ijk.y(), ijk.z())->getObject(i)->intersect(r, h, tmin);
+                    extra_flag |= get_array(ijk.x(), ijk.y(), ijk.z())->getObject(i)->intersect(r, h, tmin);
                 }
-                if(flag){
-                    return true;
-                    // std::cout<<"grid::intersect::return:3"<<std::endl;
+
+                if(extra_flag){
+                    tnext_xyz = mi.getTnext();
+                    temp_t = min(tnext_xyz[0], tnext_xyz[1]);
+                    temp_t = min(tnext_xyz[2], temp_t);  
+                    if(temp_t + EPSILON > h.getT()){
+                        return true;
+                    }
                 }
             }
             
@@ -230,6 +253,9 @@ public:
             // assert(cnt < 5);
         }
         // std::cout << "grid::intersect::return:4" << std::endl;
+        if(extra_flag){
+            return true;
+        }
         return false;
 
 
@@ -286,15 +312,6 @@ public:
         // std::cout<<"initializeRayMarch::tminmax"<<tmin << "  " <<t_min<< "  " <<t_max<< "  " <<std::endl;
         // std::cout<<"initializeRayMarch::sign"<<sign<<std::endl;
         // std::cout<<"initializeRayMarch::dt"<<mi.getDt()<<std::endl;
-        int_p = r.pointAtParameter(t_min);
-        // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
-        
-        int_p -= vec_min;
-        int_p = int_p / dxyz;
-        for(int i = 0; i < 3; i++){
-            if(int_p[i] < 0) int_p[i] = 0;
-            if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
-        }
         
         // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
         mi.setHitidx(-1);
@@ -302,33 +319,51 @@ public:
             mi.setTmin(t_max);
             return;
         } else if (t_min >= tmin){
+            int_p = r.pointAtParameter(t_min);
+            // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
+            
+            int_p -= vec_min;
+            int_p = int_p / dxyz;
+            for(int i = 0; i < 3; i++){
+                if(int_p[i] < 0) int_p[i] = 0;
+                if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
+            }
             mi.setTmin(t_min);
             for (int i = 0; i < 3; i++){
                 if (int_p[i] >= 0){
                     ijk[i] = (int)floor(int_p[i]);
                     if (sign[i] > 0){
-                        mi.setTnext(i, (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                        mi.setTnext(i, t_min + (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                     } else {
-                        mi.setTnext(i, (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                        mi.setTnext(i, t_min + (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                     }
                 }
                 if (hit_idx == i){
                     mi.setHitidx((sign[i] > 0) ? i : i + 3);
                     ijk[i] = (sign[i] > 0) ? 0 : nxyz[i] - 1;
-                    mi.setTnext(i, mi.getDt(i));
+                    mi.setTnext(i, t_min + mi.getDt(i));
                     norm_vec[i] = -sign[i];
                     mi.setNormal(norm_vec);
                 }
             }
         } else {
+            int_p = r.pointAtParameter(tmin);
+            // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
+            
+            int_p -= vec_min;
+            int_p = int_p / dxyz;
+            for(int i = 0; i < 3; i++){
+                if(int_p[i] < 0) int_p[i] = 0;
+                if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
+            }
             mi.setHitidx(6);
             mi.setTmin(tmin);
             for (int i = 0; i < 3; i++){
                 ijk[i] = (int)floor(int_p[i]);
                 if (sign[i] > 0){
-                    mi.setTnext(i, (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                    mi.setTnext(i, tmin + (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                 } else {
-                    mi.setTnext(i, (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                    mi.setTnext(i, tmin + (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                 }
             }
         }
@@ -347,6 +382,7 @@ private:
     int nz;
     Vec3f dxyz;
     Object3DVector* occ_array;
+    Object3DVector extra_objs;
     bool visualize_grid_flag;
 
 };

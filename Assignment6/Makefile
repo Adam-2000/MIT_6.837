@@ -20,8 +20,9 @@ SRCS 	 	= main.C \
 		    render.C \
 			rayTree.C \
 			grid.C \
-			boundingbox.C
-
+			boundingbox.C \
+			raytracing_stats.C \
+			perlin_noise.C
 # ===============================================================
 # NOTE:  On athena, the Mesa GL libraries are currently located in the
 #        mesa_v501 locker.  Type "add mesa_v501" to access these files.

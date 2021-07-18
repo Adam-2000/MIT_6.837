@@ -3,7 +3,7 @@
 
 #include "object3d.h"
 #include "vectors.h"
-
+#include "raytracing_stats.h"
 class Triangle: public Object3D{
 
 public:
@@ -21,6 +21,7 @@ public:
     ~Triangle(){ delete this->bbox; this->bbox = NULL;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
+        RayTracingStats::IncrementNumIntersections(); 
         Matrix mat, mat1, mat2, mat3;
         int i, j;
         float detA;

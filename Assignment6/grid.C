@@ -58,7 +58,11 @@ void Grid::paint(){
                     // if (n_obj > 1){
                     //     color_gradient[(n_obj-2)/3] -= ((n_obj-2) % 3 + 1) * (1.0 / 3.0);
                     // }
-                    
+                    if(!visualize_grid_flag){
+                        for(int i = 0; i < n_obj; i++){
+                            get_array(x, y, z)->getObject(i)->paint();
+                        }
+                    }
                     // GLfloat diffuse[4] = {color_gradient[0],color_gradient[1],color_gradient[2],1.0};
                     // glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
                     setColor(n_obj);
