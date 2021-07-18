@@ -1,0 +1,1214 @@
+desc: (none)
+cmd: ./raytracer -input scene6_09_rotated_triangles.txt -size 200 200 -output output6_09b.tga -grid 15 15 9
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=3721252
+mem_heap_B=32
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=3767918
+mem_heap_B=112
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=3811248
+mem_heap_B=1136
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=3830358
+mem_heap_B=74668
+mem_heap_extra_B=732
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=3957439
+mem_heap_B=74916
+mem_heap_extra_B=748
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=3973091
+mem_heap_B=82556
+mem_heap_extra_B=844
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=3999867
+mem_heap_B=82660
+mem_heap_extra_B=876
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=4033728
+mem_heap_B=82948
+mem_heap_extra_B=940
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=4061577
+mem_heap_B=83180
+mem_heap_extra_B=1004
+mem_stacks_B=0
+heap_tree=detailed
+n6: 83180 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 4096 0x5F341FA: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x5F443E7: _IO_doallocbuf (genops.c:365)
+   n1: 4096 0x5F432C2: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 4096 0x5F44460: _IO_default_uflow (genops.c:380)
+     n1: 4096 0x5F21C58: _IO_vfscanf (vfscanf.c:630)
+      n1: 4096 0x5F31082: fscanf (fscanf.c:31)
+       n1: 4096 0x1131AE: SceneParser::getToken(char*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+        n1: 4096 0x10FCE2: SceneParser::parseFile() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+         n1: 4096 0x10FA29: SceneParser::SceneParser(char const*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+          n0: 4096 0x10B6DC: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 2860 in 15 places, all below massif's threshold (1.00%)
+ n1: 1456 0x12224B: CellFaceVector::CellFaceVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n0: 1456 in 2 places, all below massif's threshold (1.00%)
+ n1: 1040 0x5EF93AD: __new_exitfn (cxa_atexit.c:109)
+  n1: 1040 0x5EF9537: __cxa_atexit (cxa_atexit.c:40)
+   n1: 1040 0x12752B: __static_initialization_and_destruction_0(int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 1040 0x127541: _GLOBAL__sub_I__ZNK11BoundingBox5paintEv (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n1: 1040 0x12759B: __libc_csu_init (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+      n0: 1040 0x5ED7B26: (below main) (libc-start.c:266)
+ n1: 1024 0x62B330A: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+  n1: 1024 0x62B0F3A: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+   n1: 1024 0x62AA06B: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+    n1: 1024 0x4010781: _dl_init (dl-init.c:72)
+     n1: 1024 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+      n1: 1024 0xA: ???
+       n1: 1024 0x1FFEFFFE41: ???
+        n1: 1024 0x1FFEFFFE4D: ???
+         n1: 1024 0x1FFEFFFE54: ???
+          n1: 1024 0x1FFEFFFE74: ???
+           n1: 1024 0x1FFEFFFE7A: ???
+            n1: 1024 0x1FFEFFFE7E: ???
+             n1: 1024 0x1FFEFFFE82: ???
+              n1: 1024 0x1FFEFFFE8A: ???
+               n1: 1024 0x1FFEFFFE9A: ???
+                n1: 1024 0x1FFEFFFEA0: ???
+                 n1: 1024 0x1FFEFFFEA3: ???
+                  n0: 1024 0x1FFEFFFEA6: ???
+#-----------
+snapshot=10
+#-----------
+time=4084197
+mem_heap_B=83260
+mem_heap_extra_B=1012
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=4103386
+mem_heap_B=83540
+mem_heap_extra_B=1060
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=4126802
+mem_heap_B=83620
+mem_heap_extra_B=1068
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=4145925
+mem_heap_B=83900
+mem_heap_extra_B=1116
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=4167012
+mem_heap_B=84082
+mem_heap_extra_B=1190
+mem_stacks_B=0
+heap_tree=detailed
+n6: 84082 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 3178 in 21 places, all below massif's threshold (1.00%)
+ n1: 1456 0x12224B: CellFaceVector::CellFaceVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n0: 1456 in 2 places, all below massif's threshold (1.00%)
+ n1: 1040 0x5EF93AD: __new_exitfn (cxa_atexit.c:109)
+  n1: 1040 0x5EF9537: __cxa_atexit (cxa_atexit.c:40)
+   n1: 1040 0x12752B: __static_initialization_and_destruction_0(int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 1040 0x127541: _GLOBAL__sub_I__ZNK11BoundingBox5paintEv (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n1: 1040 0x12759B: __libc_csu_init (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+      n0: 1040 0x5ED7B26: (below main) (libc-start.c:266)
+ n1: 1024 0x62B330A: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+  n1: 1024 0x62B0F3A: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+   n1: 1024 0x62AA06B: ??? (in /usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0)
+    n1: 1024 0x4010781: _dl_init (dl-init.c:72)
+     n1: 1024 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+      n1: 1024 0xA: ???
+       n1: 1024 0x1FFEFFFE41: ???
+        n1: 1024 0x1FFEFFFE4D: ???
+         n1: 1024 0x1FFEFFFE54: ???
+          n1: 1024 0x1FFEFFFE74: ???
+           n1: 1024 0x1FFEFFFE7A: ???
+            n1: 1024 0x1FFEFFFE7E: ???
+             n1: 1024 0x1FFEFFFE82: ???
+              n1: 1024 0x1FFEFFFE8A: ???
+               n1: 1024 0x1FFEFFFE9A: ???
+                n1: 1024 0x1FFEFFFEA0: ???
+                 n1: 1024 0x1FFEFFFEA3: ???
+                  n0: 1024 0x1FFEFFFEA6: ???
+#-----------
+snapshot=15
+#-----------
+time=4186953
+mem_heap_B=84728
+mem_heap_extra_B=1208
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=4215081
+mem_heap_B=105254
+mem_heap_extra_B=1226
+mem_stacks_B=0
+heap_tree=detailed
+n5: 105254 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 5262 in 29 places, all below massif's threshold (1.00%)
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 1456 0x12224B: CellFaceVector::CellFaceVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n0: 1456 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=17
+#-----------
+time=4241727
+mem_heap_B=112047
+mem_heap_extra_B=1225
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=4268339
+mem_heap_B=144308
+mem_heap_extra_B=1348
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=4286823
+mem_heap_B=144602
+mem_heap_extra_B=1390
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=4316488
+mem_heap_B=145411
+mem_heap_extra_B=1509
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=4348849
+mem_heap_B=187020
+mem_heap_extra_B=2444
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=4373671
+mem_heap_B=197100
+mem_heap_extra_B=3452
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=4392583
+mem_heap_B=204780
+mem_heap_extra_B=4220
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=4414253
+mem_heap_B=213580
+mem_heap_extra_B=5100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=4436317
+mem_heap_B=222540
+mem_heap_extra_B=5996
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=4458381
+mem_heap_B=231500
+mem_heap_extra_B=6892
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=4486355
+mem_heap_B=242860
+mem_heap_extra_B=8028
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=4514723
+mem_heap_B=254380
+mem_heap_extra_B=9180
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=4543091
+mem_heap_B=265900
+mem_heap_extra_B=10332
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=4560821
+mem_heap_B=273100
+mem_heap_extra_B=11052
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=4591553
+mem_heap_B=285580
+mem_heap_extra_B=12300
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=4622285
+mem_heap_B=298060
+mem_heap_extra_B=13548
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=4653017
+mem_heap_B=310540
+mem_heap_extra_B=14796
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=4683749
+mem_heap_B=323020
+mem_heap_extra_B=16044
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=4722164
+mem_heap_B=338620
+mem_heap_extra_B=17604
+mem_stacks_B=0
+heap_tree=detailed
+n9: 338620 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 160720 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 160720 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 160720 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 160720 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 32408 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 32408 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 8760 in 54 places, all below massif's threshold (1.00%)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=36
+#-----------
+time=4789389
+mem_heap_B=339964
+mem_heap_extra_B=17740
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=4824630
+mem_heap_B=340220
+mem_heap_extra_B=17772
+mem_stacks_B=0
+heap_tree=detailed
+n9: 340220 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 162000 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 162000 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 162000 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 32408 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 32408 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 9080 in 56 places, all below massif's threshold (1.00%)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=38
+#-----------
+time=4846202
+mem_heap_B=340476
+mem_heap_extra_B=17804
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=4869061
+mem_heap_B=345124
+mem_heap_extra_B=17828
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=4896247
+mem_heap_B=345188
+mem_heap_extra_B=17868
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=4916459
+mem_heap_B=345420
+mem_heap_extra_B=17908
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=4943934
+mem_heap_B=345660
+mem_heap_extra_B=17964
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=4967000
+mem_heap_B=345764
+mem_heap_extra_B=17988
+mem_stacks_B=0
+heap_tree=detailed
+n10: 345764 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 162000 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 162000 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 162000 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 32408 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 32408 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 10528 in 55 places, all below massif's threshold (1.00%)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4096 0x5F341FA: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 4096 0x5F443E7: _IO_doallocbuf (genops.c:365)
+   n1: 4096 0x5F432C2: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 4096 0x5F44460: _IO_default_uflow (genops.c:380)
+     n1: 4096 0x5F21C58: _IO_vfscanf (vfscanf.c:630)
+      n1: 4096 0x5F31082: fscanf (fscanf.c:31)
+       n1: 4096 0x1131AE: SceneParser::getToken(char*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+        n1: 4096 0x10FCE2: SceneParser::parseFile() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+         n2: 4096 0x10FA29: SceneParser::SceneParser(char const*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+          n1: 4096 0x120711: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+           n0: 4096 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+          n0: 0 in 1 place, below massif's threshold (1.00%)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=44
+#-----------
+time=4986189
+mem_heap_B=346044
+mem_heap_extra_B=18036
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=5009605
+mem_heap_B=346124
+mem_heap_extra_B=18044
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=5031447
+mem_heap_B=346404
+mem_heap_extra_B=18092
+mem_stacks_B=0
+heap_tree=detailed
+n10: 346404 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 162000 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 162000 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 162000 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 32408 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 32408 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 11168 in 55 places, all below massif's threshold (1.00%)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4680 0x69DAEBC: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 4680 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 4680 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 4096 0x5F341FA: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 4096 0x5F443E7: _IO_doallocbuf (genops.c:365)
+   n1: 4096 0x5F432C2: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 4096 0x5F44460: _IO_default_uflow (genops.c:380)
+     n1: 4096 0x5F21C58: _IO_vfscanf (vfscanf.c:630)
+      n1: 4096 0x5F31082: fscanf (fscanf.c:31)
+       n1: 4096 0x1131AE: SceneParser::getToken(char*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+        n1: 4096 0x10FCE2: SceneParser::parseFile() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+         n2: 4096 0x10FA29: SceneParser::SceneParser(char const*) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+          n1: 4096 0x120711: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+           n0: 4096 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+          n0: 0 in 1 place, below massif's threshold (1.00%)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=47
+#-----------
+time=5062053
+mem_heap_B=386548
+mem_heap_extra_B=19324
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=5092785
+mem_heap_B=399028
+mem_heap_extra_B=20572
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=5123517
+mem_heap_B=411508
+mem_heap_extra_B=21820
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=5139277
+mem_heap_B=417908
+mem_heap_extra_B=22460
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=5155037
+mem_heap_B=424308
+mem_heap_extra_B=23100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=5170797
+mem_heap_B=430708
+mem_heap_extra_B=23740
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=5186557
+mem_heap_B=437108
+mem_heap_extra_B=24380
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=5202317
+mem_heap_B=443508
+mem_heap_extra_B=25020
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=5218077
+mem_heap_B=449908
+mem_heap_extra_B=25660
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=5233837
+mem_heap_B=456308
+mem_heap_extra_B=26300
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=5249597
+mem_heap_B=462708
+mem_heap_extra_B=26940
+mem_stacks_B=0
+heap_tree=detailed
+n8: 462708 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 250480 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 250480 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n2: 250480 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 88480 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n0: 88480 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 64816 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n2: 64816 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 32408 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 32408 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 15360 in 57 places, all below massif's threshold (1.00%)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=58
+#-----------
+time=5265357
+mem_heap_B=469108
+mem_heap_extra_B=27580
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=5281117
+mem_heap_B=475508
+mem_heap_extra_B=28220
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=5296877
+mem_heap_B=481908
+mem_heap_extra_B=28860
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=5312637
+mem_heap_B=488308
+mem_heap_extra_B=29500
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=5328397
+mem_heap_B=494708
+mem_heap_extra_B=30140
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=5344157
+mem_heap_B=501108
+mem_heap_extra_B=30780
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=5359917
+mem_heap_B=507508
+mem_heap_extra_B=31420
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=5375677
+mem_heap_B=513908
+mem_heap_extra_B=32060
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=5391437
+mem_heap_B=520308
+mem_heap_extra_B=32700
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=5407197
+mem_heap_B=526708
+mem_heap_extra_B=33340
+mem_stacks_B=0
+heap_tree=detailed
+n8: 526708 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 314480 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 314480 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n2: 314480 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 152480 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n0: 152480 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 64816 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n2: 64816 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 32408 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 32408 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 15360 in 57 places, all below massif's threshold (1.00%)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=68
+#-----------
+time=5422957
+mem_heap_B=533108
+mem_heap_extra_B=33980
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=5494713
+mem_heap_B=536292
+mem_heap_extra_B=34300
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=5516204
+mem_heap_B=536548
+mem_heap_extra_B=34332
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=5529151
+mem_heap_B=536548
+mem_heap_extra_B=34332
+mem_stacks_B=0
+heap_tree=detailed
+n8: 536548 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 324000 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 324000 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n2: 324000 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 162000 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n0: 162000 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 64816 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n2: 64816 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 32408 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 32408 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 16384 0x69DB1F4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 16384 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 16384 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 15680 in 57 places, all below massif's threshold (1.00%)
+ n1: 15120 0x69DB662: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+  n1: 15120 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+   n0: 15120 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 6692 0x730A5AC: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 6692 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 6692 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 6692 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 6692 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 6692 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=72
+#-----------
+time=5550723
+mem_heap_B=536804
+mem_heap_extra_B=34364
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=6517071
+mem_heap_B=1496756
+mem_heap_extra_B=34388
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=7477158
+mem_heap_B=1976764
+mem_heap_extra_B=34404
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=1785002968
+mem_heap_B=1977316
+mem_heap_extra_B=34420
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=1810974228
+mem_heap_B=1981412
+mem_heap_extra_B=34428
+mem_stacks_B=0
+heap_tree=peak
+n6: 1981412 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n3: 1440024 0x10F68A: Image::Image(int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 480008 0x12078C: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 480008 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 480008 0x1207A9: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 480008 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 480008 0x1207C6: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 480008 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 324000 0x10BED6: Object3DVector::Object3DVector() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n1: 324000 0x10C044: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n2: 324000 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 162000 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n1: 162000 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+     n0: 162000 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n1: 72704 0x5606424: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25)
+  n1: 72704 0x4010781: _dl_init (dl-init.c:72)
+   n1: 72704 0x40010C8: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+    n1: 72704 0xA: ???
+     n1: 72704 0x1FFEFFFE41: ???
+      n1: 72704 0x1FFEFFFE4D: ???
+       n1: 72704 0x1FFEFFFE54: ???
+        n1: 72704 0x1FFEFFFE74: ???
+         n1: 72704 0x1FFEFFFE7A: ???
+          n1: 72704 0x1FFEFFFE7E: ???
+           n1: 72704 0x1FFEFFFE82: ???
+            n1: 72704 0x1FFEFFFE8A: ???
+             n1: 72704 0x1FFEFFFE9A: ???
+              n1: 72704 0x1FFEFFFEA0: ???
+               n1: 72704 0x1FFEFFFEA3: ???
+                n0: 72704 0x1FFEFFFEA6: ???
+ n1: 64816 0x10C022: Grid::Grid(BoundingBox*, int, int, int) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+  n2: 64816 0x10C393: RayTracer::RayTracer(SceneParser*, int, float, bool, bool, bool, int*, bool) (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n0: 32408 0x10B74C: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+   n1: 32408 0x12076B: render() (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+    n0: 32408 0x10B7C1: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+ n0: 58716 in 60 places, all below massif's threshold (1.00%)
+ n1: 21152 0x730A3BF: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+  n1: 21152 0x730E463: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+   n1: 21152 0x69EA620: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+    n1: 21152 0x69DAEF0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+     n1: 21152 0x534C10F: glutInit (in /usr/lib/x86_64-linux-gnu/libglut.so.3.9.0)
+      n0: 21152 0x10B6F5: main (in /home/cs18/Desktop/MIT_6.837/Assignment5/raytracer)
+#-----------
+snapshot=77
+#-----------
+time=1811534552
+mem_heap_B=1496756
+mem_heap_extra_B=34388
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=1812094627
+mem_heap_B=1016748
+mem_heap_extra_B=34372
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=79
+#-----------
+time=1812654702
+mem_heap_B=536740
+mem_heap_extra_B=34356
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=80
+#-----------
+time=1812670385
+mem_heap_B=511220
+mem_heap_extra_B=31804
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=81
+#-----------
+time=1812686065
+mem_heap_B=485620
+mem_heap_extra_B=29244
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=82
+#-----------
+time=1812701745
+mem_heap_B=460020
+mem_heap_extra_B=26684
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=83
+#-----------
+time=1812717425
+mem_heap_B=434420
+mem_heap_extra_B=24124
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=84
+#-----------
+time=1812733105
+mem_heap_B=408820
+mem_heap_extra_B=21564
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=85
+#-----------
+time=1812748785
+mem_heap_B=383220
+mem_heap_extra_B=19004
+mem_stacks_B=0
+heap_tree=empty

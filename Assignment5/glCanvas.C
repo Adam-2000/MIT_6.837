@@ -147,6 +147,7 @@ void GLCanvas::display(void)
     // DEFAULT: single pass rendering
     // Draw the scene once
     SPECULAR_FIX_WHICH_PASS = 0;
+    // std::cout << "glCanvas::no visualize"<<std::endl;
     scene->getGroup()->paint();
 
 #else

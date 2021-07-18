@@ -6,7 +6,7 @@
 #include "ray.h"
 #include "rayTree.h"
 #include "object3dvector.h"
-
+#define EPSILON_GRID 0.001
 static PhongMaterial m_static = PhongMaterial(Vec3f(1,1,1), Vec3f(1,1,1), 100, Vec3f(0.1,0.1,0.1), Vec3f(0.1,0.1,0.1), 1.0);
 
 
@@ -101,7 +101,7 @@ public:
         visualize_grid_flag = true;
         // std::cout<<"grid constructor:" << nx << ny << nz << bb->getMin() << bb->getMax() <<std::endl;
     }
-    // ~Grid(){delete [] occ_array;}
+    ~Grid(){delete [] occ_array;}
 
     // void set_array(Object3D* val, int x, int y, int z){
     //     occ_array[x * ny * nz + y * nz + z] = val;
@@ -153,6 +153,9 @@ public:
         Vec3f _vec5 = Vec3f(dxyz.x(), 0, dxyz.z());
         Vec3f _vec6 = Vec3f(dxyz.x(), dxyz.y(), 0);
         Vec3f _vec7 = Vec3f(dxyz.x(), dxyz.y(), dxyz.z());
+        Vec3f tnext_xyz;
+        float temp_t;
+        flag = false;
         while(ijk.x() >= 0 && ijk.x() < nx && ijk.y() >= 0 && ijk.y() < ny && ijk.z() < nz && ijk.z() >= 0){
             // std::cout <<cnt<< "   grid::ijk:  " <<ijk<< std::endl;
             p_grid = vec_min + dxyz * ijk;
@@ -211,13 +214,22 @@ public:
                     return true;
                 }
             } else{
-                flag = false;
+                
                 for (int i = 0; i < get_array(ijk.x(), ijk.y(), ijk.z())->getNumObjects(); i++){
                     flag |= get_array(ijk.x(), ijk.y(), ijk.z())->getObject(i)->intersect(r, h, tmin);
                 }
+                tnext_xyz = mi.getTnext();
+                temp_t = min(tnext_xyz[0], tnext_xyz[1]);
+                temp_t = min(tnext_xyz[2], temp_t);
                 if(flag){
+                    // if(cnt < 5){
+                    //     std::cout<<"grid::intersect::2"<< h.getIntersectionPoint() << " " << h.getT()<<std::endl;
+                    //     std::cout<<"grid::intersect::2.1"<< ijk << " " << p_grid << vec7 << temp_t<<std::endl;
+                    // }
+                    
+                    if(temp_t + EPSILON_GRID > h.getT())
                     return true;
-                    // std::cout<<"grid::intersect::return:3"<<std::endl;
+                    
                 }
             }
             
@@ -236,7 +248,7 @@ public:
 
     }
     void initializeRayMarch(MarchingInfo &mi, const Ray &r, float tmin) const{
-        // std::cout<<"initializeRayMarch::nxyz"<<nx<<ny<<nz<<std::endl;
+        // std::cout<<"initializeRayMarch::nxyz"<<nx<<ny<<nz<<""<<tmin<<std::endl;
         Vec3f vec_min = bbox->getMin();
         Vec3f vec_max = bbox->getMax();
         // std::cout<<"initializeRayMarch::vec_max"<<vec_max<<std::endl;
@@ -286,15 +298,6 @@ public:
         // std::cout<<"initializeRayMarch::tminmax"<<tmin << "  " <<t_min<< "  " <<t_max<< "  " <<std::endl;
         // std::cout<<"initializeRayMarch::sign"<<sign<<std::endl;
         // std::cout<<"initializeRayMarch::dt"<<mi.getDt()<<std::endl;
-        int_p = r.pointAtParameter(t_min);
-        // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
-        
-        int_p -= vec_min;
-        int_p = int_p / dxyz;
-        for(int i = 0; i < 3; i++){
-            if(int_p[i] < 0) int_p[i] = 0;
-            if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
-        }
         
         // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
         mi.setHitidx(-1);
@@ -302,33 +305,51 @@ public:
             mi.setTmin(t_max);
             return;
         } else if (t_min >= tmin){
+            int_p = r.pointAtParameter(t_min);
+            // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
+            
+            int_p -= vec_min;
+            int_p = int_p / dxyz;
+            for(int i = 0; i < 3; i++){
+                if(int_p[i] < 0) int_p[i] = 0;
+                if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
+            }
             mi.setTmin(t_min);
             for (int i = 0; i < 3; i++){
                 if (int_p[i] >= 0){
                     ijk[i] = (int)floor(int_p[i]);
                     if (sign[i] > 0){
-                        mi.setTnext(i, (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                        mi.setTnext(i, t_min + (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                     } else {
-                        mi.setTnext(i, (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                        mi.setTnext(i, t_min + (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                     }
                 }
                 if (hit_idx == i){
                     mi.setHitidx((sign[i] > 0) ? i : i + 3);
                     ijk[i] = (sign[i] > 0) ? 0 : nxyz[i] - 1;
-                    mi.setTnext(i, mi.getDt(i));
+                    mi.setTnext(i, t_min + mi.getDt(i));
                     norm_vec[i] = -sign[i];
                     mi.setNormal(norm_vec);
                 }
             }
         } else {
+            int_p = r.pointAtParameter(tmin);
+            // std::cout<<"initializeRayMarch::int_p"<<int_p<<std::endl;
+            
+            int_p -= vec_min;
+            int_p = int_p / dxyz;
+            for(int i = 0; i < 3; i++){
+                if(int_p[i] < 0) int_p[i] = 0;
+                if(int_p[i] >= nxyz[i]) int_p[i] = nxyz[i] - 1;
+            }
             mi.setHitidx(6);
             mi.setTmin(tmin);
             for (int i = 0; i < 3; i++){
                 ijk[i] = (int)floor(int_p[i]);
                 if (sign[i] > 0){
-                    mi.setTnext(i, (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                    mi.setTnext(i, tmin + (ceil(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                 } else {
-                    mi.setTnext(i, (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
+                    mi.setTnext(i, tmin + (floor(int_p[i]) - int_p[i]) * dxyz[i] / dir[i]);
                 }
             }
         }

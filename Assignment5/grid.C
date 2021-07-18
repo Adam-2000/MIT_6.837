@@ -54,6 +54,11 @@ void Grid::paint(){
                 // std::cout<< Vec3f(x,y,z)<<Vec3f(coord_x, coord_y, coord_z)<<get_array(x, y, z)<<std::endl;
                 n_obj = get_array(x, y, z)->getNumObjects();
                 if (n_obj > 0){
+                    // if(!visualize_grid_flag){
+                    //     for(int i = 0; i < n_obj; i++){
+                    //         get_array(x, y, z)->getObject(i)->paint();
+                    //     }
+                    // }
                     // color_gradient = Vec3f(1,1,1);
                     // if (n_obj > 1){
                     //     color_gradient[(n_obj-2)/3] -= ((n_obj-2) % 3 + 1) * (1.0 / 3.0);

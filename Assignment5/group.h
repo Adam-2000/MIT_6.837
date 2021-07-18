@@ -8,8 +8,12 @@ class Group: public Object3D{
 public:
     Group(int n): n_obj(n){
         obj = new Object3D*[n];
+        this->bbox = NULL;
     }
     ~Group(){
+        for(int i = 0; i < n_obj; i++){
+            delete obj[i];
+        }
         delete [] obj;
         if (this->bbox != NULL){
             delete this->bbox;
