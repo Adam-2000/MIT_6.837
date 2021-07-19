@@ -37,13 +37,14 @@ public:
         float Ro2 = Ro.Dot3(Ro);
         float r2 = radius * radius;
         bool inside = false;
-        if (Ro2 <= r2) inside = true;
         float tp = Ro.Dot3(r.getDirection());
-        if (!inside && tp < 0){
-            return false;
-        }
+        
         float d2 = Ro2 - tp * tp;
         if (d2 > r2){
+            return false;
+        }
+        if ((tp - EPSILON) * (tp - EPSILON) <= r2) inside = true;
+        if (!inside && tp < 0){
             return false;
         }
         float t_temp;

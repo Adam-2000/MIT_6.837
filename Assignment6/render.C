@@ -75,6 +75,7 @@ void traceRayFunction(float x, float y){
 
     // std::cout << "render:0" << std::endl;
     SceneParser scene = SceneParser(input_file);
+    // std::cout<<"tracerayfunc"<<std::endl;
     RayTracer rtracer = RayTracer(&scene, bounces, weight, shadow_flag, shade_back_flag, grid_flag, nxyz, visualize_grid_flag);
 
     Camera* cam = scene.getCamera();
