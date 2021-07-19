@@ -10,8 +10,14 @@ class Plane: public Object3D{
 public:
     Plane(Vec3f &normal, float d, Material* m): normal(normal), d(d){
         this->m = m;
+        trans = NULL;
     }
-    ~Plane(){}
+    ~Plane(){
+        if(trans != NULL){
+            delete trans;
+            trans = NULL;
+        }
+    }
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         RayTracingStats::IncrementNumIntersections(); 
@@ -28,6 +34,12 @@ public:
         return false;
     }
     void insertIntoGrid(Grid *g, Matrix *m){
+        if(m != NULL){
+            trans = new Transform(*m, this);
+            trans->clearDelflag();
+            g->add_extra_object(trans);
+            return;
+        }
         g->add_extra_object(this);
     }
     void paint(){
@@ -59,6 +71,7 @@ private:
 
     Vec3f normal;
     float d;
+    Transform* trans;
 
 };
 

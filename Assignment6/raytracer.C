@@ -44,11 +44,11 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     if (weight < cutoff_weight){
         return ret_color;
     }
-    Vec3f color_diffused;
-    Vec3f color_diffused__;
-    Vec3f color_specular;
+    // Vec3f color_diffused;
+    // Vec3f color_diffused__;
+    // Vec3f color_specular;
     Vec3f color_light;
-    Vec3f color_obj;
+    // Vec3f color_obj;
     Vec3f color_reflected, color_transmitted;
     Vec3f dir_light;
     Vec3f p_insct;
@@ -62,11 +62,10 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     Vec3f ReflectiveColor;
     Vec3f TransparentColor;
     Vec3f dir_transmitted;
-    float cos;
+    // float cos;
     float dis2light = INFINITY;
     int k;
-    bool inside = false;
-    float index_out, index_in;
+    float index_out;
     // float tstop = LONG_RAY;
     bool int_flag = false;
     // std::cout << "traceRay:0.2:"<<visualize_grid_flag << grid_flag<< std::endl;
@@ -89,16 +88,17 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     if (obj_boss->intersect(r, h, tmin)){
         p_insct = h.getIntersectionPoint();
         m = h.getMaterial();
-        color_obj = m->getDiffuseColor();
-        color_diffused.Set(0, 0, 0);
-        color_specular.Set(0, 0, 0);
+        // color_obj = m->getDiffuseColor();
+        // color_diffused.Set(0, 0, 0);
+        // color_specular.Set(0, 0, 0);
         index_out = m->getIndexOfRefraction();
         // tstop = h.getT();
         // flag_lit = false;
         if (h.getNormal().Dot3(r.getDirection()) > 0){
             // flag_lit = true;
-            h.set(h.getT(), m, -h.getNormal(), r);
-            inside = true;
+            if(shade_back_flag){
+                h.set(h.getT(), m, -h.getNormal(), r);
+            }
             index_out = 1.0;
         }
         normal = h.getNormal();
@@ -120,19 +120,20 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
                 }
                 RayTree::AddShadowSegment(ray_shadow, 0, LONG_RAY);
             }
-            cos = dir_light.Dot3(normal);
-            if (shade_back_flag && cos < 0){
-                cos = - cos;
-            }
-            if(cos > 0){
-                // flag_lit = true;
-                Vec3f::Mult(color_diffused__, color_light, color_obj);
-                color_diffused += color_diffused__ * cos;
-                color_specular += m->Shade(r, h, dir_light, color_light);
-            }
+            // cos = dir_light.Dot3(normal);
+            // if (shade_back_flag && cos < 0){
+            //     cos = - cos;
+            // }
+            // if(cos > 0){
+            //     // flag_lit = true;
+            //     Vec3f::Mult(color_diffused__, color_light, color_obj);
+            //     color_diffused += color_diffused__ * cos;
+            //     color_specular += m->Shade(r, h, dir_light, color_light);
+            // }
+            ret_color += m->Shade(r, h, dir_light, color_light);
         }
-
-        ret_color = color_diffused + ambient_light_color * color_obj + color_specular;
+        ret_color += m->Shade(r, h, Vec3f(0, 0, 0), ambient_light_color);
+        // ret_color = color_diffused + ambient_light_color * color_obj + color_specular;
         ReflectiveColor = m->getReflectiveColor();
         if(ReflectiveColor.Length() > EPSILON & (!visualize_grid_flag)){
             ray_reflect = Ray(p_insct, mirrorDirection(normal, r.getDirection()));

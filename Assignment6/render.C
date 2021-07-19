@@ -192,12 +192,14 @@ void render(){
     float t;
     Vec3f raytrace_color;
     Vec3f white = Vec3f(1, 1, 1);
-
+    int bigger_size = max(height, width);
+    int height_offset = (bigger_size - height) >> 1;
+    int width_offset = (bigger_size - width) >> 1;
     for (i = 0; i < height; i++){
         for (j = 0; j < width; j++){
             h = Hit(N_LARGE, NULL, Vec3f());
             // point.Set((j+0.5)/width, 1 - (i + 0.5) / height);
-            point_screen.Set((j+0.5)/width, (i + 0.5) / height);
+            point_screen.Set((j + width_offset +0.5)/width, (i + height_offset + 0.5) / width);
             r = cam->generateRay(point_screen);
             raytrace_color = rtracer.traceRay(r, tmin, 0, 1.0, 1.0, h);
             img_output.SetPixel(j, i, raytrace_color);
