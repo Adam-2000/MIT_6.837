@@ -23,6 +23,7 @@ public:
         delete this->bbox; this->bbox = NULL;
         if(trans != NULL){
             delete trans;
+            trans = NULL;
         }
     }
 
@@ -102,7 +103,10 @@ public:
             Vec3f::Min(_vec_min, _vec_min, _c);
             Vec3f::Max(_vec_max, _a, _b);
             Vec3f::Max(_vec_max, _vec_max, _c);
+            // std::cout <<"triangle::insertintogrid::1" <<std::endl;
             trans = new Transform(*m, this);
+            trans->clearDelflag();
+            // std::cout <<"triangle::insertintogrid::2" <<std::endl;
             obj_ptr = trans;
             // std::cout <<"triangle::insertintogrid::_abc::" << _a << _b << _c <<std::endl;
         }

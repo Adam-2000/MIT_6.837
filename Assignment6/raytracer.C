@@ -70,17 +70,23 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
     // float tstop = LONG_RAY;
     bool int_flag = false;
     // std::cout << "traceRay:0.2:"<<visualize_grid_flag << grid_flag<< std::endl;
-    if (!grid_flag){
-        int_flag = g->intersect(r, h, tmin); 
+    Object3D* obj_boss;
+    if(grid_flag){
+        obj_boss = this->g;
     } else {
-        int_flag = this->g->intersect(r, h, tmin); 
+        obj_boss = g;
     }
+    // if (!grid_flag){
+    //     int_flag = g->intersect(r, h, tmin); 
+    // } else {
+    //     int_flag = this->g->intersect(r, h, tmin); 
+    // }
     RayTracingStats::IncrementNumNonShadowRays();
     // std::cout << "traceRay:1.0" << std::endl;
     // int_flag = this->g->intersect(r, h, tmin); 
     // int_flag = g->intersect(r, h, tmin); 
     // std::cout << "traceRay:int_flag::" << int_flag<< std::endl;
-    if (int_flag){
+    if (obj_boss->intersect(r, h, tmin)){
         p_insct = h.getIntersectionPoint();
         m = h.getMaterial();
         color_obj = m->getDiffuseColor();
@@ -99,12 +105,12 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
         for (k = 0; k < n_lights; k++){
             light_ptr = s->getLight(k);
             light_ptr->getIllumination(p_insct, dir_light, color_light, dis2light);
-            if (shadows) {
+            if (shadows & (!visualize_grid_flag)) {
                 ray_shadow = Ray(p_insct, dir_light);
                 hit_shadow = Hit(N_LARGE, NULL, Vec3f());
                 // std::cout<<dir_light;
                 RayTracingStats::IncrementNumShadowRays();
-                if (g->intersect(ray_shadow, hit_shadow, EPSILON)){
+                if (obj_boss->intersect(ray_shadow, hit_shadow, EPSILON)){
                     // std::cout<<"1";
                     RayTree::AddShadowSegment(ray_shadow, 0, hit_shadow.getT());
                     // if (hit_shadow.getT() + EPSILON < dis2light){
@@ -128,7 +134,7 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
 
         ret_color = color_diffused + ambient_light_color * color_obj + color_specular;
         ReflectiveColor = m->getReflectiveColor();
-        if(ReflectiveColor.Length() > EPSILON){
+        if(ReflectiveColor.Length() > EPSILON & (!visualize_grid_flag)){
             ray_reflect = Ray(p_insct, mirrorDirection(normal, r.getDirection()));
             color_reflected = ReflectiveColor * traceRay(ray_reflect, EPSILON, bounces + 1, 
                             ReflectiveColor.Length(), index_out, hit_reflect); 
@@ -139,7 +145,7 @@ Vec3f RayTracer::traceRay(Ray &r, float tmin, int bounces, float weight,
             }
         }
         TransparentColor = m->getTransparentColor();
-        if(TransparentColor.Length() > EPSILON){
+        if(TransparentColor.Length() > EPSILON & (!visualize_grid_flag)){
             if(transmittedDirection(normal, r.getDirection(), indexOfRefraction, index_out, dir_transmitted)){
                 ray_transmit = Ray(p_insct, dir_transmitted);
                 color_transmitted = TransparentColor * traceRay(ray_transmit, EPSILON, bounces + 1, 

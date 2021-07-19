@@ -13,6 +13,7 @@ public:
         inv_m.Inverse();
         inv_m.Transpose(inv_t_m);
         det = mat.get_det();
+        del_flag = true;
         this->bbox = NULL;
         if (obj->getBoundingBox() != NULL){
             Vec3f vec_min = obj->getBoundingBox()->getMin();
@@ -42,8 +43,11 @@ public:
             delete this->bbox; 
             this->bbox = NULL;
         }
+        if(del_flag)
         delete obj;
     }
+
+    void clearDelflag(){del_flag = false;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         Vec3f orig = r.getOrigin();
@@ -56,7 +60,7 @@ public:
         Vec3f new_normal;
         // Hit h_temp;
         // r is problemetic
-        // std::cout<<"?"<<std::endl;
+        // std::cout<<"transform""intersect"<<r.getDirection()<<std::endl;
         // std::cout<<h.getT()<<std::endl;
         // std::cout<<h.getNormal()<<std::endl;
         // h_temp.set(h.getT() / std::pow(det, 1.0/3), h.getMaterial(), h.getNormal(), r_tran);
@@ -107,6 +111,7 @@ private:
     Matrix inv_m;
     Matrix inv_t_m;
     float det;
+    bool del_flag;
 
 };
 

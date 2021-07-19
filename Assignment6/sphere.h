@@ -7,6 +7,7 @@
 #include "grid.h"
 #include "matrix.h"
 #include "raytracing_stats.h"
+#include "transform.h"
 #define PI 3.141592653589793238462 
 extern int theta_steps;
 extern int phi_steps;
@@ -16,12 +17,19 @@ class Sphere: public Object3D{
 public:
     Sphere(Vec3f &center, float radius, Material* m): center(center), radius(radius){
         this->m = m;
+        trans = NULL;
         Vec3f vec_min = center - Vec3f(radius, radius, radius);
         Vec3f vec_max = center + Vec3f(radius, radius, radius);
 
         this->bbox = new BoundingBox(vec_min, vec_max);
     }
-    ~Sphere(){delete this->bbox; this->bbox = NULL;}
+    ~Sphere(){
+        delete this->bbox; this->bbox = NULL;
+        if(trans != NULL){
+            delete trans;
+            trans = NULL;
+        }
+    }
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         RayTracingStats::IncrementNumIntersections(); 
@@ -74,6 +82,8 @@ public:
         float _radius = radius;
         Vec3f _center = center; 
         if(m != NULL){
+            trans = new Transform(*m, this);
+            trans->clearDelflag();
             Vec3f vec_min_obj = getBoundingBox()->getMin();
             Vec3f vec_max_obj = getBoundingBox()->getMax();
             Vec3f vec_min_new = vec_min_obj;
@@ -122,7 +132,7 @@ public:
                 for (int y = (int)vec_min.y(); y <= (int)vec_max.y(); y++){
                     for(int z = (int)vec_min.z(); z <= (int)vec_max.z(); z++){
                         // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
-                        g->add_object(this, x, y, z);
+                        g->add_object(trans, x, y, z);
                         // std::cout<<grid_center << " " << dist <<std::endl;
                         // std::cout<<x<<y<<z<<g->get_array(x, y, z)<<std::endl;
                     }
@@ -158,7 +168,7 @@ private:
 
     Vec3f center;
     float radius;
-
+    Transform* trans;
 };
 
 #endif /*_SPHERE_H_*/

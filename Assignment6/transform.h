@@ -14,6 +14,7 @@ public:
         inv_m.Transpose(inv_t_m);
         det = mat.get_det();
         this->bbox = NULL;
+        del_flag = true;
         if (obj->getBoundingBox() != NULL){
             Vec3f vec_min = obj->getBoundingBox()->getMin();
             Vec3f vec_max = obj->getBoundingBox()->getMax();
@@ -42,8 +43,12 @@ public:
             delete this->bbox; 
             this->bbox = NULL;
         }
-        delete obj;
+        if(del_flag){
+            delete obj;
+        }
     }
+
+    void clearDelflag(){del_flag = false;}
 
     bool intersect(const Ray &r, Hit &h, float tmin){
         Vec3f orig = r.getOrigin();
@@ -107,6 +112,7 @@ private:
     Matrix inv_m;
     Matrix inv_t_m;
     float det;
+    bool del_flag;
 
 };
 

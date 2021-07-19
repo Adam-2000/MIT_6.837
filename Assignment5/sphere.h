@@ -80,6 +80,7 @@ public:
         Vec3f _center = center; 
         if(m != NULL){
             trans = new Transform(*m, this);
+            trans->clearDelflag();
             Vec3f vec_min_obj = getBoundingBox()->getMin();
             Vec3f vec_max_obj = getBoundingBox()->getMax();
             Vec3f vec_min_new = vec_min_obj;
