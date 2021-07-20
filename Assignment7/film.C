@@ -10,30 +10,29 @@ void Film::renderSamples(char *samples_file, int sample_zoom) {
 
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
-      
       // make a dark grey checkerboard pattern
       for (int zi = i*sample_zoom; zi < (i+1)*sample_zoom; zi++) {
-	for (int zj = j*sample_zoom; zj < (j+1)*sample_zoom; zj++) {
-	  if (((i+j)%2)==0)
-	    image.SetPixel(zi,zj,Vec3f(0.2,0.2,0.2));
-	  else 
-	    image.SetPixel(zi,zj,Vec3f(0,0,0));
-	}
+        for (int zj = j*sample_zoom; zj < (j+1)*sample_zoom; zj++) {
+          if (((i+j)%2)==0)
+            image.SetPixel(zi,zj,Vec3f(0.2,0.2,0.2));
+          else 
+            image.SetPixel(zi,zj,Vec3f(0,0,0));
+        }
       }
       
       // draw the sample points
       for (int n = 0; n < num_samples; n++) {
-	Sample s = getSample(i,j,n);
-	Vec2f p = s.getPosition();
-	assert (p.x() >= 0 && p.x() <= 1);
-	assert (p.y() >= 0 && p.y() <= 1);
-	int x = (int)floor((i+p.x())*sample_zoom);
-	int y = (int)floor((j+p.y())*sample_zoom);
-	assert (x >= 0);
-	if (x >= width*sample_zoom) x = width*sample_zoom - 1;
-	assert (y >= 0);
-	if (y >= height*sample_zoom) y = height*sample_zoom - 1;
-	image.SetPixel(x,y,s.getColor());
+        Sample s = getSample(i,j,n);
+        Vec2f p = s.getPosition();
+        assert (p.x() >= 0 && p.x() <= 1);
+        assert (p.y() >= 0 && p.y() <= 1);
+        int x = (int)floor((i+p.x())*sample_zoom);
+        int y = (int)floor((j+p.y())*sample_zoom);
+        assert (x >= 0);
+        if (x >= width*sample_zoom) x = width*sample_zoom - 1;
+        assert (y >= 0);
+        if (y >= height*sample_zoom) y = height*sample_zoom - 1;
+        image.SetPixel(x,y,s.getColor());
       }
     }
   }

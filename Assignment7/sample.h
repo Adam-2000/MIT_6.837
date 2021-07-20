@@ -36,6 +36,78 @@ private:
 
 };
 
+
+class Sampler{
+
+public:
+  Sampler(){}
+  Sampler(int n_samples):n_samples(n_samples){}
+  ~Sampler(){}
+
+  virtual Vec2f getSamplePosition(int n) = 0;
+
+
+protected:
+  int n_samples;
+
+};
+
+class RandomSampler: public Sampler{
+
+public:
+  RandomSampler(int n_samples){
+    this->n_samples = n_samples;
+  }
+  ~RandomSampler(){}
+
+  Vec2f getSamplePosition(int n){
+    return Vec2f(drand48(), drand48());
+  }
+
+};
+
+class UniformSampler: public Sampler{
+
+public:
+  UniformSampler(int n_samples){
+    this->n_samples = n_samples;
+    n_sqrt = (int)sqrt(n_samples);
+    d = 1.0 / n_sqrt;
+    start_p = d / 2.0;
+  }
+  ~UniformSampler(){}
+
+  Vec2f getSamplePosition(int n){
+    return Vec2f(start_p + d * (n % n_sqrt), start_p + d * (n / n_sqrt));
+  }
+
+private:
+  float start_p;
+  float d;
+  int n_sqrt;
+};
+
+class JitteredSampler: public Sampler{
+
+public:
+  JitteredSampler(int n_samples){
+    this->n_samples = n_samples;
+    n_sqrt = (int)sqrt(n_samples);
+    d = 1.0 / n_sqrt;
+  }
+  ~JitteredSampler(){}
+
+  Vec2f getSamplePosition(int n){
+    return Vec2f(d * (n % n_sqrt + drand48()), d * (n / n_sqrt + drand48()));
+  }
+
+private:
+  float d;
+  int n_sqrt;
+};
+
+
+
 // ==================================================================
 
 #endif
