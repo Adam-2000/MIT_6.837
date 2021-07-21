@@ -4,3 +4,4 @@
 **/*.depend
 **/*.tga
 **/raytracer
+**/curve_editor
