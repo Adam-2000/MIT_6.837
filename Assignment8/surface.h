@@ -41,9 +41,6 @@ public:
     // FOR GENERATING TRIANGLES
     virtual TriangleMesh* OutputTriangles(ArgParser *args){}
 
-protected:
-    Curve* c;
-    int label;
 };
 
 class SurfaceOfRevolution: public Surface {
@@ -169,16 +166,60 @@ public:
         delete [] vert;
         return tria;
     }
-
+private:
+    Curve* c;
+    int label;
 };
 
 class BezierPatch: public Surface {
 
 public:
 
-    BezierPatch(){}
-    BezierPatch(Curve* c){}
+    BezierPatch(){
+        n_vertices = 16;
+        vertices = new Vec3f[16];
+    }
     ~BezierPatch(){}
+    void Paint(ArgParser *args){
+        glPointSize(5);
+        glBegin(GL_POINTS);
+            glColor3f(1,0,0);
+            for(int i = 0; i < n_vertices; i++){
+                glVertex3f(vertices[i].x(), vertices[i].y(), vertices[i].z());
+            }
+        glEnd();
+        glLineWidth(1);
+        glBegin(GL_LINES);
+            glColor3f(0,0,1);
+            for(int i = 0; i < n_vertices - 1; i++){
+                glVertex3f(vertices[i].x(), vertices[i].y(), vertices[i].z());
+                glVertex3f(vertices[i+1].x(), vertices[i+1].y(), vertices[i+1].z());
+            }
+        glEnd();
+    }
+    TriangleMesh* OutputTriangles(ArgParser *args){ 
+        float t, dt, s;
+        int n_lines = args->patch_tessellation;
+        dt = 1.0 / n_lines;
+        Vec3f vert[4];
+        TriangleNet* tria = new TriangleNet(n_lines, n_lines);
+        t = 0;
+        for(int i = 0; i < n_lines + 1; i++){
+            s = 0;
+            for(int j = 0; j < 4; j++){
+                vert[j] =  pow(1-t, 3)* vertices[4*j] + 3 * t * pow(1-t, 2) * vertices[4*j+1]
+                        + 3 * t * t * (1 - t) * vertices[4*j+2] + t * t * t * vertices[4*j+3];
+            }
+            for(int j = 0; j < n_lines + 1; j++){
+                tria->SetVertex(i, j, pow(1-s, 3)* vert[0] + 3 * s * pow(1-s, 2) * vert[1]
+                        + 3 * s * s * (1 - s) * vert[2] + s * s * s * vert[3]);
+                s += dt;
+            }
+            t += dt;
+        }   
+     
+        return tria;
+    }
 };
 
 #endif
