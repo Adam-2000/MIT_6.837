@@ -157,9 +157,6 @@ public:
   float operator[](int i) const { 
     assert (i >= 0 && i < 3); 
     return data[i]; }
-  float& operator[](int i) { 
-    assert (i >= 0 && i < 3); 
-    return data[i]; }
   float x() const { return data[0]; }
   float y() const { return data[1]; }
   float z() const { return data[2]; }
@@ -244,13 +241,7 @@ public:
     data[1] /= f;
     data[2] /= f;
     return *this; }
-  Vec3f operator/(const Vec3f &vec) const {
-    
-    return Vec3f(data[0] / vec.x(), data[1] / vec.y(), data[2] / vec.z()); }
 
-  Vec3f operator-()const{
-    return Vec3f(-data[0], -data[1], -data[2]);
-  }
   
   friend Vec3f operator+(const Vec3f &v1, const Vec3f &v2) { 
     Vec3f v3; Add(v3,v1,v2); return v3; } 
@@ -304,15 +295,6 @@ public:
     float y = v1.data[2]*v2.data[0] - v1.data[0]*v2.data[2];
     float z = v1.data[0]*v2.data[1] - v1.data[1]*v2.data[0];
     c.data[0] = x; c.data[1] = y; c.data[2] = z; }
-
-  static void Min(Vec3f &a, const Vec3f &b, const Vec3f &c ) {
-    a.data[0] = (b.data[0] < c.data[0]) ? b.data[0] : c.data[0];
-    a.data[1] = (b.data[1] < c.data[1]) ? b.data[1] : c.data[1];
-    a.data[2] = (b.data[2] < c.data[2]) ? b.data[2] : c.data[2]; }
-  static void Max(Vec3f &a, const Vec3f &b, const Vec3f &c ) {
-    a.data[0] = (b.data[0] > c.data[0]) ? b.data[0] : c.data[0];
-    a.data[1] = (b.data[1] > c.data[1]) ? b.data[1] : c.data[1];
-    a.data[2] = (b.data[2] > c.data[2]) ? b.data[2] : c.data[2]; }
   
   // INPUT / OUTPUT
   void Write(FILE *F = stdout) const {
@@ -533,3 +515,4 @@ inline ostream &operator<<(ostream &os, const Vec3f &v) {
 // ====================================================================
 
 #endif
+

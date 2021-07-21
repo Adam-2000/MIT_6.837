@@ -11,16 +11,6 @@
 #include "vectors.h"
 
 
-float det4x4(float a1, float a2, float a3, float a4, 
-	     float b1, float b2, float b3, float b4, 
-	     float c1, float c2, float c3, float c4, 
-	     float d1, float d2, float d3, float d4);
-float det3x3(float a1,float a2,float a3,
-	     float b1,float b2,float b3,
-	     float c1,float c2,float c3);
-float det2x2(float a, float b,
-	     float c, float d);
-
 // ===================================================================
 // ===================================================================
 // COPY CONSTRUCTOR
@@ -69,18 +59,6 @@ void Matrix::Transpose(Matrix &m) const {
   }
 }
 
-float Matrix::get_det(){
-  float a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
-  a1 = data[0][0]; b1 = data[0][1]; c1 = data[0][2]; d1 = data[0][3];
-  a2 = data[1][0]; b2 = data[1][1]; c2 = data[1][2]; d2 = data[1][3];
-  a3 = data[2][0]; b3 = data[2][1]; c3 = data[2][2]; d3 = data[2][3];
-  a4 = data[3][0]; b4 = data[3][1]; c4 = data[3][2]; d4 = data[3][3];
-
-  float det = det4x4(a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4,d1,d2,d3,d4);
-  return det;
-}
-
-
 // ===================================================================
 // ===================================================================
 // INVERSE
@@ -126,10 +104,10 @@ int Matrix::Inverse(Matrix &m, float epsilon) const {
   return 1;
 }
 
-float det4x4(float a1, float a2, float a3, float a4, 
-	     float b1, float b2, float b3, float b4, 
-	     float c1, float c2, float c3, float c4, 
-	     float d1, float d2, float d3, float d4) {
+float Matrix::det4x4(float a1, float a2, float a3, float a4, 
+		     float b1, float b2, float b3, float b4, 
+		     float c1, float c2, float c3, float c4, 
+		     float d1, float d2, float d3, float d4) {
   return 
       a1 * det3x3( b2, b3, b4, c2, c3, c4, d2, d3, d4)
     - b1 * det3x3( a2, a3, a4, c2, c3, c4, d2, d3, d4)
@@ -137,17 +115,17 @@ float det4x4(float a1, float a2, float a3, float a4,
     - d1 * det3x3( a2, a3, a4, b2, b3, b4, c2, c3, c4);
 }
 
-float det3x3(float a1,float a2,float a3,
-	     float b1,float b2,float b3,
-	     float c1,float c2,float c3) {
+float Matrix::det3x3(float a1,float a2,float a3,
+		     float b1,float b2,float b3,
+		     float c1,float c2,float c3) {
   return
       a1 * det2x2( b2, b3, c2, c3 )
     - b1 * det2x2( a2, a3, c2, c3 )
     + c1 * det2x2( a2, a3, b2, b3 );
 }
 
-float det2x2(float a, float b,
-	     float c, float d) {
+float Matrix::det2x2(float a, float b,
+		     float c, float d) {
   return a * d - b * c;
 }
 
@@ -367,11 +345,9 @@ void Matrix::Read3x3(FILE *F) {
   Clear();
   for (int y = 0; y < 4; y++) {
     if (y == 2) continue;
-    // std::cout<<std::endl;
     for (int x = 0; x < 4; x++) {
       if (x == 2) continue;
       int scanned = fscanf (F,"%f",&data[y][x]);
-      // std::cout<<data[y][x];
       assert (scanned == 1); 
     } 
   } 

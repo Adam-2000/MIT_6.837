@@ -30,13 +30,13 @@ public:
      glMat[4]=data[0][1];  glMat[5]=data[1][1];  glMat[6]=data[2][1];  glMat[7]=data[3][1];
      glMat[8]=data[0][2];  glMat[9]=data[1][2]; glMat[10]=data[2][2]; glMat[11]=data[3][2];
     glMat[12]=data[0][3]; glMat[13]=data[1][3]; glMat[14]=data[2][3]; glMat[15]=data[3][3];
-    return glMat; }
+    return glMat;
+  }
   float Get(int x, int y) const { 
     assert (x >= 0 && x < 4);
     assert (y >= 0 && y < 4);
     return data[y][x]; }
   
-  float get_det();
   // MODIFIERS
   void Set(int x, int y, float v) {
     assert (x >= 0 && x < 4);
@@ -86,10 +86,6 @@ public:
     Transform(v2);
     v.Set(v2.x(),v2.y()); }
 
-  void TransformPoint(Vec3f &v) const {
-    Vec4f v2 = Vec4f(v.x(),v.y(),v.z(),1);
-    Transform(v2);
-    v.Set(v2.x()/v2.w(),v2.y()/v2.w(),v2.z()/v2.w()); }
   // Use to transform the direction of the ray
   // (ignores any translation)
   void TransformDirection(Vec3f &v) const {
@@ -102,7 +98,17 @@ public:
   void Write3x3(FILE *F = stdout) const;
   void Read(FILE *F);
   void Read3x3(FILE *F);
-  
+
+  static float det4x4(float a1, float a2, float a3, float a4, 
+			      float b1, float b2, float b3, float b4, 
+			      float c1, float c2, float c3, float c4, 
+			      float d1, float d2, float d3, float d4);
+  static float det3x3(float a1,float a2,float a3,
+			      float b1,float b2,float b3,
+			      float c1,float c2,float c3);
+  static float det2x2(float a, float b,
+			      float c, float d);
+
 private:
 
   // REPRESENTATION
@@ -112,16 +118,5 @@ private:
 
 // ====================================================================
 // ====================================================================
-inline ostream &operator<<(ostream &os, const Matrix &m) {
-  os << "Matrix <\n";
-  for (int i = 0; i < 4; i++){
-    for (int j = 0; j < 4; j++){
-      os << m.Get(j, i)<<"  ";
-    }
-    os << "\n";
-  }
-  return os;
-}
-
 
 #endif
