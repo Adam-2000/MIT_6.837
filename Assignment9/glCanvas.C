@@ -40,6 +40,7 @@ int GLCanvas::motion_blur = 0;
 
 void GLCanvas::initialize(Parser *_parser, float _refresh, float _dt, 
 			  int _integrator_color, int _draw_vectors, float _acceleration_scale, int _motion_blur) {
+  // std::cout << "glcanvas::initialize:0" <<std::endl;
   parser = _parser;
   refresh = _refresh;
   dt = _dt;
@@ -72,9 +73,10 @@ void GLCanvas::initialize(Parser *_parser, float _refresh, float _dt,
   glutKeyboardFunc(keyboard);
 
   glutTimerFunc(0,idle,0);
-
+  // std::cout << "glcanvas::initialize:2" <<std::endl;
   // Enter the main rendering loop
   glutMainLoop();
+  // std::cout << "glcanvas::initialize:end" <<std::endl;
 }
 
 // ========================================================
@@ -83,7 +85,7 @@ void GLCanvas::initialize(Parser *_parser, float _refresh, float _dt,
 // ========================================================
 
 void GLCanvas::display(void) {
-
+  // std::cout << "glcanvas::display:0" <<std::endl;
   // Clear the display buffer
   glClearColor(0,0,0,1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -118,6 +120,7 @@ void GLCanvas::display(void) {
 
   // swap buffers
   glutSwapBuffers();
+  // std::cout << "glcanvas::display:end" <<std::endl;
 }
 
 // ========================================================
@@ -125,6 +128,7 @@ void GLCanvas::display(void) {
 // ========================================================
 
 void GLCanvas::reshape(int w, int h) {
+  // std::cout << "glcanvas::reshape:0" <<std::endl;
 
   // Set the OpenGL viewport to fill the entire window
   glViewport(0, 0, (GLsizei)w, (GLsizei)h);
@@ -168,6 +172,7 @@ void GLCanvas::mouse(int button, int state, int x, int y) {
 // ========================================================
 
 void GLCanvas::motion(int x, int y) {
+  // std::cout << "glcanvas::motion:0" <<std::endl;
   if (mouse_button == -1) return;
 
   // LEFT BUTTON ROTATES
@@ -214,6 +219,7 @@ void GLCanvas::motion(int x, int y) {
 // ========================================================
 
 void GLCanvas::keyboard(unsigned char key, int x, int y) {
+  // std::cout << "glcanvas::keyboard:0" <<std::endl;
   switch (key) {
   case 'p':  case 'P':
     if (paused == 0) {
@@ -245,6 +251,7 @@ void GLCanvas::keyboard(unsigned char key, int x, int y) {
 // ========================================================
 
 void GLCanvas::idle(int value) {
+  // std::cout << "glcanvas::idle:0" <<std::endl;
   int refresh_milliseconds = int(1000*refresh);
   glutTimerFunc(refresh_milliseconds,idle,0);
   if (paused) return;
@@ -252,12 +259,15 @@ void GLCanvas::idle(int value) {
 }
 
 void GLCanvas::step() {
+  // std::cout << "glcanvas::step:0" <<std::endl;
   for (int i = 0; i < parser->getNumSystems(); i++) {
     parser->getSystem(i)->Update(dt); }
   glutPostRedisplay();
+  // std::cout << "glcanvas::step:end" <<std::endl;
 }
 
 void GLCanvas::restart() {
+  // std::cout << "glcanvas::restart:0" <<std::endl;
   for (int i = 0; i < parser->getNumSystems(); i++) {
     parser->getSystem(i)->Restart(); }
   glutPostRedisplay();

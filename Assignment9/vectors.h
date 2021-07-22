@@ -240,7 +240,19 @@ public:
     data[1] /= f;
     data[2] /= f;
     return *this; }
-
+    
+  Vec3f operator/(float f) const{
+    Vec3f vec;
+    vec.data[0] = data[0] / f;
+    vec.data[1] = data[1] / f;
+    vec.data[2] = data[2] / f;
+    return vec; }
+  Vec3f operator-() const{
+    Vec3f vec;
+    vec.data[0] = - data[0];
+    vec.data[1] = - data[1];
+    vec.data[2] = - data[2];
+    return vec; }
   
   friend Vec3f operator+(const Vec3f &v1, const Vec3f &v2) { 
     Vec3f v3; Add(v3,v1,v2); return v3; } 

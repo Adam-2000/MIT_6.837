@@ -1,4 +1,6 @@
 #include <stdio.h>
+// #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 using namespace std;
 
@@ -8,7 +10,7 @@ using namespace std;
 // ====================================================================
 // ====================================================================
 
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
 
   // command line argument defaults
   const char *filename = NULL;
@@ -46,12 +48,15 @@ int main(int argc, char *argv[]) {
 
   // load the particle system
   assert (filename != NULL);
-  Parser *parser = new Parser(argv[2]);
-  
+  Parser *parser = new Parser(filename);
+  glutInit(&argc, argv);
   // launch viewer!   and it never returns...
   GLCanvas glcanvas;
+  // std::cout << "main:1" <<std::endl;
   glcanvas.initialize(parser,refresh,dt,integrator_color,
 		      draw_vectors,acceleration_scale,motion_blur);
+  delete parser;
+  // std::cout << "main:2" <<std::endl;
   return 0;
 }
 
